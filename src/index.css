@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
 @theme {
     --color-primary: #ffffff;
     --color-secondary: #1da9cc;
@@ -7,3 +14,4 @@
     --color-accent: #113d47;
     --color-text: #1c1c1b;
 }
+
