@@ -32,18 +32,18 @@ function Home(){
             </section>
 
             {/* Tour Category */}
-            {/* <section className="w-full h-[600px] flex flex-col bg-primary">
+            <section className="w-full h-[600px] flex flex-col bg-primary">
                <Topic topic="Wonderfull Places For You" subtopic="Tour Categories" margin="mt-40"/>
               
 
-                <div className="w-full h-[400px] mt-15 flex flex-row justify-center items-center gap-8">
+                <div className="w-full h-[400px] mt-15 flex-row place-items-center justify-items-center gap-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                     <div className="w-[275px] h-[350px] bg-primary rounded-3xl drop-shadow-xl bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${hero})` }}></div>
                     <div className="w-[275px] h-[350px] bg-primary rounded-3xl drop-shadow-xl bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${hero})` }}></div>
                     <div className="w-[275px] h-[350px] bg-primary rounded-3xl drop-shadow-xl bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${hero})` }}></div>
                     <div className="w-[275px] h-[350px] bg-primary rounded-3xl drop-shadow-xl bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${hero})` }}></div>
-                    <div className="w-[275px] h-[350px] bg-primary rounded-3xl drop-shadow-xl bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${hero})` }}></div>
+                    {/* <div className="w-[275px] h-[350px] bg-primary rounded-3xl drop-shadow-xl bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${hero})` }}></div> */}
                 </div>
-            </section> */}
+            </section>
 
 
              {/* Popular Destination */}
