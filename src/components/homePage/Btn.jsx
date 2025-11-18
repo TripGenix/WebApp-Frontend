@@ -1,6 +1,6 @@
 function Btn(props){
     return(
-        <button className={`w-[200px] h-[45px] text-primary rounded-3xl mr-4 ${props.bg} ${props.border}`}>{props.name}</button>
+        <button className={`w-[150px] h-[35px] text-primary rounded-3xl ${props.bg} ${props.border} md:w-[200px] md:h-[45px]`}>{props.name}</button>
     )
 }
 
