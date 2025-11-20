@@ -1,25 +1,24 @@
 import { useState } from "react";
 import { FiTrash2, FiPlus } from "react-icons/fi";
 
-export default function DynamicList({ title = "Add Destination" }) {
-  const [items, setItems] = useState([]);
+export default function DynamicList({ title = "Add Destination",destinations,setDestinations }) {
   const [newItem, setNewItem] = useState("");
 
   const addItem = () => {
     if (newItem.trim() === "") return;
-    setItems([...items, newItem]);
+    setDestinations([...destinations, newItem]);
     setNewItem("");
   };
 
   const removeItem = (index) => {
-    setItems(items.filter((_, i) => i !== index));
+    setDestinations(destinations.filter((_, i) => i !== index));
   };
 
   return (
     <div className="space-y-2">
       <label className="text-gray-900 text-[15px] font-medium">{title}</label>
       <div className="space-y-3">
-        {items.map((item, index) => (
+        {destinations.map((item, index) => (
           <div
             key={index}
             className="flex justify-between items-center bg-gray-100 px-4 py-3 rounded-xl text-gray-800"

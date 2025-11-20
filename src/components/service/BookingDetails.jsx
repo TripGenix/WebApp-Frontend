@@ -1,20 +1,30 @@
-import { useState } from "react";
 import InputField from "../InputField";
 
-function BookingDetails() {
-  const [nameOfBooker, setNameOfBooker] = useState("");
-  const [passportNumber, setPassportNumber] = useState("");
-  const [arrivalDateTime, setArrivalDateTime] = useState("");
-  const [departureDateTime, setDepartureDateTime] = useState("");
-  const [flightNumber, setFlightNumber] = useState("");
-  const [departureAirport, setDepartureAirport] = useState("");
-  const [adults, setAdults] = useState(0);
-  const [children, setChildres] = useState(0);
-  const [babies, setBabies] = useState(0);
-
+function BookingDetails({
+  nameOfBooker,
+  setNameOfBooker,
+  passportNumber,
+  setPassportNumber,
+  arrivalDateTime,
+  setArrivalDateTime,
+  departureDateTime,
+  setDepartureDateTime,
+  flightNumber,
+  setFlightNumber,
+  departureAirport,
+  setDepartureAirport,
+  adults,
+  setAdults,
+  children,
+  setChildres,
+  babies,
+  setBabies,
+}) {
   return (
     <div className=" bg-gray-50 mb-10 p-3">
-      <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">Booking Details</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">
+        Booking Details
+      </h1>
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
         {/* Name of Booker */}
@@ -62,7 +72,9 @@ function BookingDetails() {
         />
       </div>
 
-      <h1 className="text-xl mt-6 mb-3 text-center font-bold sm:text-left">Passenger Count</h1>
+      <h1 className="text-xl mt-6 mb-3 text-center font-bold sm:text-left">
+        Passenger Count
+      </h1>
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
         {/* Name of Booker */}
@@ -88,8 +100,6 @@ function BookingDetails() {
           value={babies}
           onChange={(e) => setBabies(e.target.value)}
         />
-
-
       </div>
     </div>
   );

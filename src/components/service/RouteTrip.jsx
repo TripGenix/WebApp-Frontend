@@ -2,13 +2,21 @@ import { useState } from "react";
 import InputField from "../InputField";
 import DynamicList from "./DynamicList";
 
-function RouteTrip() {
-  const [startLocation, setStartLocation] = useState("");
-  const [endLocation, setEndLocation] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [isVehicle, setVehicle] = useState(false);
-
+function RouteTrip({
+  startLocation,
+  setStartLocation,
+  endLocation,
+  setEndLocation,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  isVehicle,
+  setVehicle,
+  destinations,
+  setDestinations,
+  submit,
+}) {
   return (
     <div className="bg-gray-50 mb-10 p-6 rounded-xl">
       <h1 className="text-3xl font-bold mb-6">Trip Details</h1>
@@ -35,7 +43,7 @@ function RouteTrip() {
 
         {/* Destination List */}
         <div className="row-span-3">
-          <DynamicList title="Add Destination" />
+          <DynamicList title="Add Destination" destinations={destinations} setDestinations={setDestinations} />
         </div>
 
         {/* Start Date */}
@@ -89,6 +97,14 @@ function RouteTrip() {
         <div>
           <button className="bg-[#fafafa] border border-black px-4 py-3 rounded-md hover:bg-[#9e9e9e] w-full text-center">
             Select Driver
+          </button>
+        </div>
+
+        <div>
+          <button className="bg-[#fafafa] border border-black px-4 py-3 rounded-md hover:bg-[#9e9e9e] w-full text-center"
+          onClick={submit}
+          >
+            Proceed
           </button>
         </div>
       </div>
