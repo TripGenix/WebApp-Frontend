@@ -24,8 +24,10 @@ function Navbar(){
                     </Link>
                 </div>
 
-                <div className="w-fit h-fit bg-amber-400 sm:hidden">Icon</div>
+                <div className="w-fit h-fit text-xl sm:hidden"><ion-icon name="menu-outline"></ion-icon></div>
             </div>
+
+           
         </div>
     )
 }

@@ -7,6 +7,7 @@ export default defineConfig({
   screens: {
     theme: {
     screens: {
+      esm:'320px',
       sm: '480px',   // your custom mobile breakpoint
       md: '768px',
       lg: '1024px',

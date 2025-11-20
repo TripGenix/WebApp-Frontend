@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import Navbar from './components/navbar'
+import Navbar from '../src/components/Navbar'
 import './App.css'
 import Home from '../src/pages/Home'
 import Booking from '../src/pages/Booking'
 import Contact from '../src/pages/Contact'
 import About from '../src/pages/About'
 import Btn from './components/homePage/Btn'
+import Guide from './components/homePage/guide'
+import Footer from './components/Footer'
 
 function App() {
   
@@ -15,6 +17,7 @@ function App() {
        
        <Router>
           <Navbar />
+          {/* <Guide /> */}
           
           <Routes>
             <Route path="/" element={<Home />} />
@@ -23,6 +26,7 @@ function App() {
             <Route path="/About" element={<About />} />
             
           </Routes>
+          <Footer />
        </Router>
     </>
   )
