@@ -149,26 +149,12 @@ export default function CustomPackage() {
             {routeData ? (
               <TripSummary
                 name={nameOfBooker}
-                pickupLocation={startLocation}
-                startDate={arrivalDateTime}
-                endDate={departureDateTime}
-                distance={
-                  routeData.routes[0].legs.reduce(
-                    (sum, leg) => sum + leg.distance.value,
-                    0
-                  ) /
-                    1000 +
-                  " km"
-                }
-                timeDuration={
-                  routeData.routes[0].legs.reduce(
-                    (sum, leg) => sum + leg.duration.value,
-                    0
-                  ) /
-                    60 +
-                  " mins"
-                }
-                polyline={routeData.routes[0].overview_polyline.points}
+                startLocation={startLocation}
+                endLocation={endLocation}
+                startDate={startDate}
+                endDate={endDate}
+                waypoints={destinations}
+                routeData={routeData}
               />
             ) : (
               <p className="text-gray-500 text-center italic">
