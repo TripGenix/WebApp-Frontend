@@ -44,7 +44,12 @@ function Navbar() {
           </div>
 
           <Link to="/Contact" className="hover:text-blue-500">Contact</Link>
-
+          <Link 
+            to="/login" 
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          >
+            User Login
+          </Link>
         </div>
       </div>
     </nav>
