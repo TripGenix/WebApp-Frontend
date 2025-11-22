@@ -38,14 +38,12 @@ function Footer(){
 
 
             <div className="w-full m-5">
-                <div className="w-fit bg-purple-100 text-2xl text-accent">Instergram Post</div>
-                <div className="w-fit h-fit grid grid-cols-3 max-w-xl bg-amber-950 gap-5">
-                    <div className="w-[50px] h-5 bg-green-200"></div>
-                    <div className="w-[50px] h-5 bg-green-200"></div>
-                    <div className="w-[50px] h-5 bg-green-200"></div>
-                    <div className="w-[50px] h-5 bg-green-200"></div>
-                    <div className="w-[50px] h-5 bg-green-200"></div>
-                    <div className="w-[50px] h-5 bg-green-200"></div>
+                <div className="w-fit text-2xl text-accent">Instergram Post</div>
+                <div className="w-full h-fit grid grid-cols-2 lg:grid-cols-2 gap-5 mt-5">
+                    <div className="w-[75%] h-30 bg-green-200 rounded-xl"></div>
+                    <div className="w-[75%] h-30 bg-green-200 rounded-xl"></div>
+                    <div className="w-[75%] h-30 bg-green-200 lg:hidden rounded-xl"></div>
+                    <div className="w-[75%] h-30 bg-green-200 lg:hidden rounded-xl"></div>
                 </div>
             </div>
         </div>
