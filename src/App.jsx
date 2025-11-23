@@ -10,6 +10,7 @@ import UserRegister from "./pages/UserRegister";
 
 function App() {
   return (
+    
     <BrowserRouter>
       <Navbar />
       <Routes>

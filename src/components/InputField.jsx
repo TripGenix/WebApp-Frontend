@@ -1,4 +1,4 @@
-const InputField = ({ label, placeholder,name="name", type = "text", value, onChange }) => {
+const InputField = ({ label, placeholder,name="name", type = "text", value, onChange,error="" }) => {
   return (
     <div className="flex flex-col gap-2 w-full">
       <label className="text-gray-900 text-[15px] font-medium">
@@ -19,7 +19,8 @@ const InputField = ({ label, placeholder,name="name", type = "text", value, onCh
           shadow-sm
         "
       />
-      
+      <p className="text-xs text-red-500 h-4">{error}</p>
+
     </div>
   );
 };
