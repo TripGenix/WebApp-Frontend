@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import InputField from "../components/InputField";
 import bgImage from "../assets/Document.png";
 import { uploadImageToSupabase } from "../services/ImageSave";
+import { registerTourist } from "../services/UserRegister";
 
 export default function UserRegister() {
   const [userData, setUserData] = useState({
@@ -85,13 +86,42 @@ export default function UserRegister() {
     return Object.keys(formErrors).length === 0;
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!validateForm()) {
       alert("Please fix the errors before submitting");
       return;
     }
-    alert("Form submitted successfully!");
-    console.log("User Data:", userData);
+
+    try {
+      const response = await registerTourist(userData);
+      console.log("Backend Response:", response);
+
+      setUserData({
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        profile_image_url: "",
+        passport_nic_number: "",
+        address_line1: "",
+        address_line2: "",
+        city: "",
+        state_province: "",
+        postal_code: "",
+        country: "",
+        date_of_birth: "",
+        password: "",
+        confirm_password: "",
+      });
+
+      setProfileImagePreview(null);
+      setErrors({});
+
+      // alert("User registered successfully!");
+    } catch (error) {
+      console.error("Registration error:", error);
+      // alert("Registration failed!");
+    }
   };
 
   return (
