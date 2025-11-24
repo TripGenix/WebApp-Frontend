@@ -41,6 +41,7 @@ export default function HorizontalSlider() {
         loop={true}
         freeMode={false}
         mousewheel={{ forceToAxis: true }}
+        // style={{ overflow: 'visible' }}
         keyboard={{ enabled: true }}
         breakpoints={{
          

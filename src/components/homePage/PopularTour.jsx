@@ -1,4 +1,5 @@
 import Card1 from "./Card1"
+import Card2 from "./Card2"
 import Topic from "./topic"
 
 function PopularTour(){
@@ -12,13 +13,26 @@ function PopularTour(){
                     
                     </div>
                     
-                    <div className="w-full h-[400px] flex-row  absolute z-8 top-50 left-0 sm:top-60 gap-5 place-items-center justify-items-center grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+                    <div className="w-full h-[400px]  max-w-7xl absolute z-8 top-50 left-5 lg:left-15 sm:top-60 gap-5 place-items-center justify-items-center grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                         
-                            <Card1  />
-                            <Card1 hid="hidden" blo="sm:block" />
-                            <Card1 hid="hidden" blo="sm:block" />
-                            <Card1 hid="hidden" blo="lg:block" />
-                            <Card1 hid="hidden" blo="lg:block" />
+                            <Card2  />
+                            <Card2 hid="hidden" blo="md:block" />
+                            <Card2 hid="hidden" blo="lg:block" />
+                            <Card2 hid="hidden" blo="lg:block" />
+                            
+
+                            {/* <Card1
+                                img={someImage}
+                                title="Italy Tour Package"
+                                rating={4.8}
+                                ratingText="(4.8 Rating)"
+                                price="980.00"
+                                per="/Person"
+                                duration="7 Days"
+                                hid="hidden md:block"     // optional – your old responsive props
+                                blo="lg:block"            // optional
+                            /> */}
+                            
                     </div>
                 </div>
                 
