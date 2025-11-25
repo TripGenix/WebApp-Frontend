@@ -7,10 +7,14 @@ import Contact from "./pages/Contact";
 import CustomPackage from "./pages/CustomBooking";
 import UserLogin from "./pages/UserLogin";
 import UserRegister from "./pages/UserRegister";
+import PrivateRoute from "./route/PrivateRoute";
+import Dashboard from "./pages/Dashboard";
+import { useEffect } from "react";
+import { loadMaps } from "./services/loadMaps";
 
 function App() {
+
   return (
-    
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -21,6 +25,15 @@ function App() {
         <Route path="/CustomPackage" element={<CustomPackage />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/register" element={<UserRegister />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

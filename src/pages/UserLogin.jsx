@@ -1,15 +1,40 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { Link } from "react-router-dom";
 import InputField from "../components/InputField";
 import bgImage from "../assets/Document.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const navigator = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/tourists/login",
+        { email, password }
+      );
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+
+      const decoded = jwtDecode(token);
+
+      localStorage.setItem("userId", decoded.userId);
+      localStorage.setItem("firstName", decoded.firstName);
+      localStorage.setItem("lastName", decoded.lastName);
+      localStorage.setItem("role", decoded.role);
+
+      navigator("/dashboard");
+    } catch (err) {
+      console.error(err);
+      alert("Login failed!");
+    }
   };
 
   return (
