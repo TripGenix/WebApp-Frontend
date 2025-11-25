@@ -76,7 +76,7 @@ export default function CustomPackage() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:80s80/api/places?district=${selectedDistrict}`
+        `http://localhost:8080/api/places?district=${selectedDistrict}`
       );
       setPlaces(res.data);
     } catch (err) {
@@ -146,7 +146,7 @@ export default function CustomPackage() {
 
           {/* trip summery*/}
           <div className="col-span-12 lg:col-span-4">
-            {routeData ? (
+            
               <TripSummary
                 name={nameOfBooker}
                 startLocation={startLocation}
@@ -156,11 +156,6 @@ export default function CustomPackage() {
                 waypoints={destinations}
                 routeData={routeData}
               />
-            ) : (
-              <p className="text-gray-500 text-center italic">
-                Enter trip details & click Proceed
-              </p>
-            )}
           </div>
         </div>
 
