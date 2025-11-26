@@ -1,6 +1,4 @@
-<<<<<<< Updated upstream
-const InputField = ({ label, placeholder, type = "text", value, onChange }) => {
-=======
+
 import { useRef } from "react";
 
 const InputField = ({
@@ -14,7 +12,7 @@ const InputField = ({
 }) => {
   const inputRef = useRef(null);
 
->>>>>>> Stashed changes
+
   return (
     <div className="flex flex-col gap-2 w-full relative">
       <label className="text-gray-900 text-[15px] font-medium">{label}</label>
@@ -35,12 +33,10 @@ const InputField = ({
           shadow-sm
         "
       />
-<<<<<<< Updated upstream
-      
-=======
+
 
       <p className="text-xs text-red-500 h-4">{error}</p>
->>>>>>> Stashed changes
+
     </div>
   );
 };
