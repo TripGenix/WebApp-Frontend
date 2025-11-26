@@ -29,6 +29,7 @@ function RouteTrip({
             label="Start Location"
             value={startLocation}
             onChange={(e) => setStartLocation(e.target.value)}
+            enableAutocomplete={true}
           />
         </div>
 
@@ -43,7 +44,11 @@ function RouteTrip({
 
         {/* Destination List */}
         <div className="row-span-3">
-          <DynamicList title="Add Destination" destinations={destinations} setDestinations={setDestinations} />
+          <DynamicList
+            title="Add Destination"
+            destinations={destinations}
+            setDestinations={setDestinations}
+          />
         </div>
 
         {/* Start Date */}
@@ -101,8 +106,9 @@ function RouteTrip({
         </div>
 
         <div>
-          <button className="bg-[#fafafa] border border-black px-4 py-3 rounded-md hover:bg-[#9e9e9e] w-full text-center"
-          onClick={submit}
+          <button
+            className="bg-[#fafafa] border border-black px-4 py-3 rounded-md hover:bg-[#9e9e9e] w-full text-center"
+            onClick={submit}
           >
             Proceed
           </button>
