@@ -9,14 +9,13 @@ import UserLogin from "./pages/UserLogin";
 import UserRegister from "./pages/UserRegister";
 import PrivateRoute from "./route/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
-import { useEffect } from "react";
-import { loadMaps } from "./services/loadMaps";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-
   return (
     <BrowserRouter>
       <Navbar />
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Home" element={<Home />} />

@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import InputField from "../components/InputField";
 import bgImage from "../assets/Document.png";
 import { uploadImageToSupabase } from "../services/ImageSave";
 import { registerTourist } from "../services/UserRegister";
+import toast from "react-hot-toast";
 
 export default function UserRegister() {
+  const navigator = useNavigate();
+
   const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
@@ -41,12 +44,18 @@ export default function UserRegister() {
     if (file) {
       setProfileImagePreview(URL.createObjectURL(file));
 
-      uploadImageToSupabase(file).then((url) => {
-        if (url) {
-          setUserData((prev) => ({ ...prev, profile_image_url: url }));
-          console.log("Image uploaded to:", url);
-        }
-      });
+      uploadImageToSupabase(file)
+        .then((url) => {
+          if (url) {
+            setUserData((prev) => ({ ...prev, profile_image_url: url }));
+            toast.success("Successfully add Image");
+            //console.log("Image uploaded to:", url);
+          }
+        })
+        .catch((error) => {
+          console.error("Image upload error:", error);
+          toast.error("Error while uploading image");
+        });
     }
   };
 
@@ -88,7 +97,7 @@ export default function UserRegister() {
 
   const handleRegister = async () => {
     if (!validateForm()) {
-      alert("Please fix the errors before submitting");
+      toast.error("Please fix the errors before submitting");
       return;
     }
 
@@ -114,13 +123,12 @@ export default function UserRegister() {
         confirm_password: "",
       });
 
+      toast.success("Registration successful! You can now log in.");
+      navigator("/login");
       setProfileImagePreview(null);
       setErrors({});
-
-      // alert("User registered successfully!");
     } catch (error) {
       console.error("Registration error:", error);
-      // alert("Registration failed!");
     }
   };
 
