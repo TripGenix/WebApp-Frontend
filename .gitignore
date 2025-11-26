@@ -27,3 +27,4 @@ dist-ssr
 .dockerignore
 Dockerfile
 docker-compose*.yml
+.env
