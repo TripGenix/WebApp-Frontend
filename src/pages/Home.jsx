@@ -13,16 +13,12 @@ import Hero from "../components/homePage/Hero";
 function Home(){
 
 
-
-    
     return(
         <div className="w-full h-fit flex flex-col">
             
            
 
             <Hero />
-
-         
 
             <TourCatergory />
 
@@ -32,14 +28,11 @@ function Home(){
 
             <RecentGallery />
 
-
             <MeetGuide />
 
             <AboutUs />
 
             <Reviews />
-
-           
 
 
             <Newsletter />

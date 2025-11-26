@@ -30,7 +30,9 @@ function Footer(){
                     header="Address"
                     link1="+123456789"
                     link2="TripGenix@gmail.com"
-                    link3="Colombo Sri Lanka"
+                    link3="No:25 Main Street"
+                    link4="Pettah , Colombo"
+                    link5="Sri Lanka"
                 />
                 <div className="w-full m-5">
                     <div className="w-fit text-2xl text-accent">Instergram Post</div>

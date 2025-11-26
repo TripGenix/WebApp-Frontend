@@ -10,12 +10,8 @@ function TourCatergory(){
                <Topic topic="Wonderfull Places For You" subtopic="Tour Categories" margin="mt-20"/>
               
 
-                <div className="w-full h-[800px] flex items-center justify-center px-4 sm:px-10 overflow-hidden">
-                    {/* <Card1  />
-                    <Card1 hid="hidden" blo="sm:block" />
-                    <Card1 hid="hidden" blo="sm:block" />
-                    <Card1 hid="hidden" blo="lg:block" />
-                    <Card1 hid="hidden" blo="lg:block" /> */}
+                <div className="w-full h-[800px] flex items-center justify-center px-4 sm:px-10 overflow-hidden bg-[url(tour.jpg)]">
+                   
 
                     <CurveSlider />
                     
