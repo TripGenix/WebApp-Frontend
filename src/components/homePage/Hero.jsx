@@ -15,8 +15,8 @@ function Hero(){
                     </div>
 
                     <div className="w-fit h-fit flex flex-row absolute z-12 top-[50%] left-[15%] sm:left-20 md:items-start md:top-[60%] gap-10">
-                            <Btn name="Explore Tours"  bg="bg-secondary" text="text-primary"/>
-                            <Btn name="Our Services"  border="border-2 border-white" text="text-primary"/>
+                            <Btn name="Explore Tours"  bg="bg-secondary" text="text-primary" hover="hover:bg-accent" hovert="hover:text-white"/>
+                            <Btn name="Our Services"  border="border-2 border-white" text="text-primary" hover="hover:bg-white" hovert="hover:text-accent"/>
                     </div>
 
                    

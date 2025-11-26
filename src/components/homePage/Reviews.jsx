@@ -11,7 +11,7 @@ function Reviews(){
                                 <Topic topic="About us Restuarent" subtopic="News & Article"/>
                             </div>
                             <div className="mt-10 sm:mt-0">
-                                <Btn name="Explore Tours"  bg="bg-secondary" text="text-primary"/>
+                                <Btn name="Explore Tours"  bg="bg-secondary" text="text-primary" hover="hover:bg-accent" hovert="hover:text-white"/>
                             </div>
                         </div>
         

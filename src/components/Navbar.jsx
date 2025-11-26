@@ -31,13 +31,14 @@ import Btn from './homePage/Btn';
            
 import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
+import navbar from "../assets/sectionImg/nav.png"
 
 function Navbar() {
   return (
-    <nav className="w-full bg-white shadow-md px-6 py-4">
+    <nav className="w-full bg-white shadow-md px-6 py-4 bg-no-repeat" style={{ backgroundImage: `url(${navbar})` }}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
 
-        <div className="text-2xl font-bold">Logo Here</div>
+        <div className="text-2xl font-bold text-primary">Logo Here</div>
 
         <div className="hidden md:flex items-center gap-10 text-[17px] font-medium">
 

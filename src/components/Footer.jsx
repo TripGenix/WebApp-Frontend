@@ -1,11 +1,12 @@
 
 import Links from './Links'
 import man4 from '../assets/man-4.jpg'
+import foot from "../assets/sectionImg/foot-img.jpg"
 
 function Footer(){
     return(
         
-        <div className="w-full h-fit flex justify-center items-center bg-primary">
+        <div className="w-full h-fit flex  flex-col justify-center items-center">
             <div className=" max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  lg:[50vh] gap-4">
                 <div className="m-5">
                     <div className="w-fit text-2xl text-accent">Logo Here</div>
@@ -44,6 +45,8 @@ function Footer(){
                     </div>
                 </div>
             </div>
+
+            <div className="w-full h-10 bg-yellow-400 bg-cover bg-center text-primary text-[10px] flex justify-center items-center" style={{backgroundImage: `url(${foot})`}}>Copyright 2025 Tourm. All Rights Reserved.</div>
         </div>
     )
 }
