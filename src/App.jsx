@@ -1,14 +1,3 @@
-
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import Navbar from '../src/components/Navbar'
-import './App.css'
-import Home from '../src/pages/Home'
-import Booking from '../src/pages/Booking'
-import Contact from '../src/pages/Contact'
-import About from '../src/pages/About'
-import Btn from './components/homePage/Btn'
-import Guide from './components/homePage/guide'
-import Footer from './components/Footer'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "./App.css";
@@ -21,27 +10,10 @@ import UserRegister from "./pages/UserRegister";
 import PrivateRoute from "./route/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
+import WhatsappButton from "./components/WhatsappButton";
 
 function App() {
   return (
-
-    <>
-       
-       <Router>
-          <Navbar />
-          {/* <Guide /> */}
-          
-          <Routes>
-            <Route path="/Home" element={<Home />} />
-            <Route path="/Booking" element={<Booking />} />
-            <Route path="/Contact" element={<Contact />} />
-            <Route path="/About" element={<About />} />
-            
-          </Routes>
-          <Footer />
-       </Router>
-    </>
-  )
     <BrowserRouter>
       <Navbar />
       <Toaster position="top-center" reverseOrder={false} />
@@ -63,6 +35,7 @@ function App() {
           }
         />
       </Routes>
+      <WhatsappButton />
     </BrowserRouter>
   );
 }
