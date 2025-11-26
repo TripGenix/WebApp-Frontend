@@ -55,7 +55,7 @@ export default function CustomPackage() {
     };
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/maps/shortest-route",
+        `${import.meta.env.VITE_GOOGLE_MAPS_API_URL}/maps/shortest-route`,
         {
           start: startLocation,
           end: endLocation,
@@ -76,7 +76,7 @@ export default function CustomPackage() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/places?district=${selectedDistrict}`
+        `${import.meta.env.VITE_GOOGLE_MAPS_API_URL}/places?district=${selectedDistrict}`
       );
       setPlaces(res.data);
     } catch (err) {
