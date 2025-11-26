@@ -4,6 +4,7 @@ import './App.css'
 import Home from '../src/pages/Home'
 import Booking from '../src/pages/Booking'
 import Contact from '../src/pages/Contact'
+import WhatsappButton from './components/WhatsappButton'
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
             
           </Routes>
        </Router>
+       <WhatsappButton />
     </>
   )
 }
