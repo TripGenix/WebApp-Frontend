@@ -13,6 +13,8 @@ import PrivateRoute from "./route/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import FeaturedTours from "./pages/FeaturedTours";
+import DefaultBooking from "./pages/DefaultPackages/DefaultBooking";
+import DefaultBookingSummary from "./pages/DefaultPackages/DefaultBookingSummary";
 import PaymentPage from "./pages/payment/PaymentPage";
 import About from './pages/About';
 import Profile from './pages/profile';
@@ -23,6 +25,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import CanclePayment from "./pages/payment/CanclePayment";
 import SuccessPayment from "./pages/payment/SuccessPayment";
+import DefPaymentPage from "./pages/DefaultPackages/_DefPaymentPage";
+
 import TourGuidePage from "./components/tourguide/TourGuidePage";
 import Mypayments from "./pages/Mypayments";
 import Support from "./pages/Support";
@@ -75,7 +79,8 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/logout" element={<Logout />} />
-        </Routes>
+          <Route path="/defpayment" element={<DefPaymentPage />} />
+      </Routes>
       </div>
     </BrowserRouter>
   );

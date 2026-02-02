@@ -432,12 +432,16 @@ export default function FeaturedTours() {
         >
           Close
         </button>
-        <button 
-          onClick={() => navigate(`/booking/${viewedPkg.id}`)}
-          className="px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-sky-500 to-cyan-500 text-white hover:shadow-lg hover:opacity-90 transition-all transform active:scale-95"
-        >
-          Proceed to Booking
-        </button>
+        <button
+        onClick={() => {
+          localStorage.setItem("selectedPackage", JSON.stringify(viewedPkg));
+          navigate("/DefaultBooking", { state: { pkg: viewedPkg } });
+        }}
+        className="px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-sky-500 to-cyan-500 text-white hover:shadow-lg hover:opacity-90 transition-all transform active:scale-95"
+      >
+        Proceed to Booking
+      </button>
+
         </div>
       </div>
    </div>
