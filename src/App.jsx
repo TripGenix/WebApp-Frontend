@@ -13,6 +13,8 @@ import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import WhatsappButton from "./components/WhatsappButton";
 import FeaturedTours from "./pages/FeaturedTours";
+import DefaultBooking from "./pages/DefaultPackages/DefaultBooking";
+import DefaultBookingSummary from "./pages/DefaultPackages/DefaultBookingSummary";
 import PaymentPage from "./pages/payment/PaymentPage";
 import About from '../src/pages/About'
 import Profile from '../src/pages/profile'
@@ -23,6 +25,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import CanclePayment from "./pages/payment/CanclePayment";
 import SuccessPayment from "./pages/payment/SuccessPayment";
+import DefPaymentPage from "./pages/DefaultPackages/_DefPaymentPage";
 
 import TourGuidePage from "./components/tourguide/TourGuidePage";
 
@@ -49,13 +52,15 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/Booking" element={<Booking />} />
         <Route path="/Contact" element={<Contact />} />
-                    <Route path="/About" element={<About />} />
-<Route path="/Profile" element={<Profile />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/CustomPackage" element={<CustomPackage />} />
+        <Route path="/DefaultBooking" element={<DefaultBooking />} />
+        <Route path="/DefaultBookingSummary" element={<DefaultBookingSummary />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/register" element={<UserRegister />} />
         <Route path="/faq" element={<Faq />} />
-        {/* <Route path="/payment" element={<PaymentPage />} /> */}
+        <Route path="/defpayment" element={<DefPaymentPage />} />
         <Route path="/payment/:tourId" element={<PaymentPage />} />
         <Route path="cancel-tour" element={<CanclePayment />} />
         <Route path="/payment-success" element={<SuccessPayment />} />
