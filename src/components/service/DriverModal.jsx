@@ -1,6 +1,8 @@
 import React from "react";
 
-function DriverModal({ drivers, onClose, onSelect }) {
+function DriverModal({ drivers = [], onClose, onSelect }) {
+  const hasDrivers = drivers.length > 0;
+
   return (
     <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-xl w-full max-w-xl max-h-[80vh] overflow-y-auto shadow-lg">
@@ -11,35 +13,54 @@ function DriverModal({ drivers, onClose, onSelect }) {
           <button className="text-lg font-bold" onClick={onClose}>✖</button>
         </div>
 
-        {/* Driver List */}
-        <div className="grid grid-cols-1 gap-4">
-          {drivers.map((d) => (
-            <div
-              key={d.id}
-              className="border rounded-xl p-3 hover:bg-gray-100 flex gap-4 items-center"
-            >
-              <img
-                src={d.photo}
-                alt={d.name}
-                className="w-20 h-20 rounded-full object-cover"
-              />
+        {/* Driver List / Empty State */}
+        {hasDrivers ? (
+          <div className="grid grid-cols-1 gap-4">
+            {drivers.map((d) => (
+              <div
+                key={d.id}
+                className="border rounded-xl p-3 hover:bg-gray-100 flex gap-4 items-center"
+              >
+                <img
+                  src={d.photo}
+                  alt={d.name}
+                  className="w-20 h-20 rounded-full object-cover"
+                />
 
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold">{d.name}</h3>
-                <p className="text-gray-600">Experience: {d.experience}</p>
-                <p className="text-gray-600">Rating: ⭐ {d.rating}</p>
-                <p className="text-gray-600">Phone: {d.phone}</p>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold">{d.name}</h3>
+                  <p className="text-gray-600">
+                    Experience: {d.experience}
+                  </p>
+                  <p className="text-gray-600">
+                    Rating: ⭐ {d.rating}
+                  </p>
+                  <p className="text-gray-600">
+                    Phone: {d.phone}
+                  </p>
 
-                <button
-                  onClick={() => onSelect(d)}
-                  className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  Select Driver
-                </button>
+                  <button
+                    onClick={() => onSelect(d)}
+                    className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  >
+                    Select Driver
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          /* EMPTY STATE */
+          <div className="text-center py-10">
+            <div className="text-5xl mb-4">🚫</div>
+            <p className="text-lg font-semibold text-gray-700">
+              No drivers assigned for this vehicle
+            </p>
+            <p className="text-gray-500 mt-1">
+              Please select another vehicle or try again later.
+            </p>
+          </div>
+        )}
 
       </div>
     </div>
