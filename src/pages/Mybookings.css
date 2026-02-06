@@ -1,0 +1,142 @@
+.bookings-container {
+  padding: 30px;
+  background: #f6fbff;
+  border-radius: 12px;
+}
+
+.bookings-container h2 {
+  color: #0077b6;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.bookings-table-wrapper {
+  overflow-x: auto;
+}
+
+/* ===== DESKTOP TABLE ===== */
+.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 700px;
+}
+
+.bookings-table th,
+.bookings-table td {
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.bookings-table th {
+  background: #e6f4ff;
+  color: #0077b6;
+}
+
+.bookings-table tr:nth-child(even) {
+  background: #f9fcff;
+}
+
+.bookings-table tr:hover {
+  background: #eef7ff;
+}
+
+/* ===============================
+   PAYMENT STATUS (same as payments)
+   =============================== */
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status.paid {
+  background: #d4f7dc;
+  color: #1b7f3b;
+}
+
+.status.pending {
+  background: #fff1c1;
+  color: #9a6b00;
+}
+
+/* ===============================
+   DRIVER STATUS
+   =============================== */
+
+.driver-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.driver-status.assigned {
+  background: #d6ecff;
+  color: #0a58ca;
+}
+
+.driver-status.ontheway {
+  background: #e8ddff;
+  color: #6f42c1;
+}
+
+.driver-status.notassigned {
+  background: #ffd9d9;
+  color: #c82333;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE (CARD VIEW)
+   =============================== */
+
+@media (max-width: 768px) {
+  .bookings-table {
+    min-width: 100%;
+    border-radius: 0;
+  }
+
+  .bookings-table thead {
+    display: none;
+  }
+
+  .bookings-table,
+  .bookings-table tbody,
+  .bookings-table tr,
+  .bookings-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .bookings-table tr {
+    background: #ffffff;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .bookings-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border: none;
+    font-size: 14px;
+  }
+
+  .bookings-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #0077b6;
+  }
+}

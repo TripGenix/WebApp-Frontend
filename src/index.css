@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 #root {
   max-width: 100%;
@@ -7,13 +9,14 @@
 }
 
 
-@theme {
+:root {
   --color-primary: #ffffff;
   --color-secondary: #1da9cc;
   --color-ternary: #e8f7fa;
   --color-accent: #113d47;
   --color-text: #1c1c1b;
 }
+
 
 @layer components {
 

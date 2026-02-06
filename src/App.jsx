@@ -14,8 +14,15 @@ import { Toaster } from "react-hot-toast";
 import WhatsappButton from "./components/WhatsappButton";
 import FeaturedTours from "./pages/FeaturedTours";
 import PaymentPage from "./pages/PaymentPage";
-import About from '../src/pages/About'
-import Profile from '../src/pages/profile'
+import About from '../src/pages/About';
+import Profile from '../src/pages/profile';
+import Mypayments from "./pages/Mypayments";
+
+import Wishlist from "./pages/Wishlist";
+import Support from "./pages/Support";
+import Settings from "./pages/Settings";
+import Logout from "./pages/Logout";
+//import DashboardLayout from "./layouts/DashboardLayout";
 
 
 function App() {
@@ -45,7 +52,19 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/FeaturedTours" element={<FeaturedTours />} />
+
+        
+          <Route path="/FeaturedTours" element={<FeaturedTours />} />
+
+          
+          <Route path="/payments" element={<Mypayments />} />
+         
+          <Route path="/wishlist" element={<Wishlist />} />
+         
+          <Route path="/support" element={<Support />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/logout" element={<Logout />} />
+        
       </Routes>
       <WhatsappButton />
     </BrowserRouter>
