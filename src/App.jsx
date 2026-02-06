@@ -16,7 +16,7 @@ import FeaturedTours from "./pages/FeaturedTours";
 import PaymentPage from "./pages/payment/PaymentPage";
 import About from '../src/pages/About'
 import Profile from '../src/pages/profile'
-
+import EditProfile from '../src/pages/Editprofile'
 import Test from './pages/test'
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -26,9 +26,6 @@ import SuccessPayment from "./pages/payment/SuccessPayment";
 
 import TourGuidePage from "./components/tourguide/TourGuidePage";
 
-import PaymentPage from "./pages/PaymentPage";
-import About from '../src/pages/About';
-import Profile from '../src/pages/profile';
 import Mypayments from "./pages/Mypayments";
 
 import Wishlist from "./pages/Wishlist";

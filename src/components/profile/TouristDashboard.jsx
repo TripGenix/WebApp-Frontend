@@ -10,7 +10,6 @@ import Mypayments from "../../pages/Mypayments";
 import Wishlist from "../../pages/Wishlist";
 import Support from "../../pages/Support";
 import Settings from "../../pages/Settings";
-import EditProfile from "../../pages/EditProfile";
 
 
 export default function TouristDashboard() {
