@@ -4,6 +4,8 @@ import UserCoupan from "../components/Home/UserCoupan";
 import PlanTrip from "../components/Home/planTrip";
 import TourCatergory from "../components/homePage/TourCatergory";
 import PopularDestination from "../components/homePage/PopularDestination";
+import Footer from "../components/Footer";
+import FooterNew from "../components/FooterNew";
 
 function Home() {
   return (
@@ -14,6 +16,9 @@ function Home() {
       <ShotrestPath />
       <TourCatergory />
       <PopularDestination />
+      
+      <FooterNew />
+      
     </>
   );
 }

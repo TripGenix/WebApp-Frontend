@@ -8,6 +8,7 @@ import StatsBar from "../components/FAQ/StatsBar";
 import ContactSection from "../components/FAQ/ContactSection";
 import TrustBadges from "../components/FAQ/TrustBadges";
 import { Plane, Car, CreditCard, MapPin, Globe } from "lucide-react";
+import FooterNew from "../components/FooterNew";
 
 const FAQ = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -109,6 +110,7 @@ const FAQ = () => {
       />
       <ContactSection />
       <TrustBadges />
+      <FooterNew />
     </div>
   );
 };
