@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 // IMAGE CAROUSEL
 function ImageCarousel({ images }) {
@@ -7,6 +8,7 @@ function ImageCarousel({ images }) {
 
   const prev = () => setIndex((index - 1 + images.length) % images.length);
   const next = () => setIndex((index + 1) % images.length);
+
 
   const touchStartX = React.useRef(0);
 
@@ -64,6 +66,8 @@ function ImageCarousel({ images }) {
 
 // MAIN MODAL COMPONENT
 function VehicleModal({ vehicles, onClose, onSelect, passengerCount }) {
+
+    const nav=useNavigate();
   async function viewVehicle(vehicleId) {
     try {
       const response = await axios.get(
@@ -122,9 +126,9 @@ function VehicleModal({ vehicles, onClose, onSelect, passengerCount }) {
                 </p>
 
                 <div>
-                  <button onClick={() => viewVehicle(v.vehicleId)}>view</button>
+                  {/* <button onClick={() => viewVehicle(v.vehicleId)}>view</button> */}
                   <button
-                    onClick={() => onSelect(v)}
+                    onClick={() => nav(`/VehicleView`)}
                     className="mt-3 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
                   >
                     Select Vehicle

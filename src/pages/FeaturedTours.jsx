@@ -397,8 +397,6 @@ export default function FeaturedTours() {
                      </div>
               </div>
 
-
-
               <div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
                   <Info className="w-5 h-5 text-sky-500" />

@@ -28,6 +28,7 @@ import SuccessPayment from "./pages/payment/SuccessPayment";
 import DefPaymentPage from "./pages/DefaultPackages/_DefPaymentPage";
 
 import TourGuidePage from "./components/tourguide/TourGuidePage";
+import VehicleView from "./pages/VehicleView";  
 
 
 
@@ -57,6 +58,7 @@ function App() {
         <Route path="/CustomPackage" element={<CustomPackage />} />
         <Route path="/DefaultBooking" element={<DefaultBooking />} />
         <Route path="/DefaultBookingSummary" element={<DefaultBookingSummary />} />
+        <Route path="/VehicleView" element={<VehicleView />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/register" element={<UserRegister />} />
         <Route path="/faq" element={<Faq />} />
