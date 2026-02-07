@@ -1,3 +1,4 @@
+import FooterNew from "../components/FooterNew.jsx";
 import PackageCard from "../components/service/SelectPackage.jsx";
 
 function Booking() {
@@ -36,6 +37,7 @@ function Booking() {
           </div>
         ))}
       </div>
+      <FooterNew />
     </>
   );
 }
