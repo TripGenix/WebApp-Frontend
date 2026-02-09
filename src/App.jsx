@@ -13,8 +13,6 @@ import PrivateRoute from "./route/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import FeaturedTours from "./pages/FeaturedTours";
-import DefaultBooking from "./pages/DefaultPackages/DefaultBooking";
-import DefaultBookingSummary from "./pages/DefaultPackages/DefaultBookingSummary";
 import PaymentPage from "./pages/payment/PaymentPage";
 import About from './pages/About';
 import Profile from './pages/profile';
