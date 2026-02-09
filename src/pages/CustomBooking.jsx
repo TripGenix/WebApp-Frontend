@@ -340,13 +340,13 @@ export default function CustomPackage() {
 
     const payload = {
       user: {
-        userId: Number(localStorage.getItem("userId")), // ✅ FIXED
+        userId: Number(localStorage.getItem("userId")), 
         role: localStorage.getItem("role"),
       },
 
       bookingDetails: {
         nameOfBooker: bookingDetails.nameOfBooker,
-        bookerEmail: bookingDetails.emailAddress, // ✅ FIXED KEY
+        bookerEmail: bookingDetails.emailAddress, 
         bookerPhone: bookingDetails.bookerPhone,
         passportNumber: bookingDetails.passportNumber,
         arrivalDateTime: bookingDetails.arrivalDateTime,
