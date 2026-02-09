@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import VehicleApi from "../services/VehicleApi.js";
 import OwnerModal from "../components/Vehicleview/OwnerModel.jsx";
 import VehicleCard from "../components/Vehicleview/VehicleCard.jsx";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function VehicleView() {
   const nav = useNavigate();
@@ -20,7 +21,10 @@ export default function VehicleView() {
   const [selectedVehicleForOwner, setSelectedVehicleForOwner] = useState(null);
   const [category, setCategory] = useState("ALL");
   const [categories, setCategories] = useState([]);
- 
+
+  const [page, setPage] = useState(1);
+  const pageSize = 12; 
+
   useEffect(() => {
     (async () => {
       try {
@@ -138,6 +142,23 @@ export default function VehicleView() {
     });
   }, [data, search, category,status, minPassengers]);
 
+  useEffect(() => {
+  setPage(1);
+}, [search, status, category, minPassengers]);
+
+ const totalItems = filtered.length;
+const totalPages = useMemo(() => {
+  return Math.max(1, Math.ceil(totalItems / pageSize));
+}, [totalItems]);
+
+const currentPage = Math.min(page, totalPages);
+
+const paginated = useMemo(() => {
+  const start = (currentPage - 1) * pageSize;
+  return filtered.slice(start, start + pageSize);
+}, [filtered, currentPage]);
+
+
   const handleOwnerClick = (vehicle) => {
     const owner = vehicle?.owner;
     setSelectedOwner(owner || { name: "Loading...", phone: "-" });
@@ -187,7 +208,7 @@ export default function VehicleView() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 py-10 space-y-8">
+      <div className="max-w-8xl mx-auto px-4 py-10 space-y-8">
         <div className="flex items-start justify-between gap-4 flex-col md:flex-row">
           <div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
@@ -286,8 +307,8 @@ export default function VehicleView() {
         )}
 
         {!loading && !errMsg && filtered.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((v, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {paginated.map((v, idx) => (
               <div
                 key={v.vehicleId}
                 style={{
@@ -303,6 +324,77 @@ export default function VehicleView() {
             ))}
           </div>
         )}
+
+    {/* Pagination */}
+    {!loading && !errMsg && totalItems > 0 && (
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-8">
+        <p className="font-semibold text-gray-900">
+          Showing{" "}
+          <span className="font-semibold">
+            {(currentPage - 1) * pageSize + 1}
+          </span>
+          {" - "}
+          <span className="font-semibold">
+            {Math.min(currentPage * pageSize, totalItems)}
+          </span>{" "}
+          of <span className="font-semibold">{totalItems}</span>
+        </p>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            className={`h-10 px-4 rounded-lg border text-sm font-semibold transition ${
+              currentPage === 1
+                ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                : "bg-white hover:bg-gray-50 border-gray-300"
+            }`}
+                      aria-label="Previous page"
+                      title="Previous"      
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {/* Page numbers */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .slice(
+              Math.max(0, currentPage - 3),
+              Math.min(totalPages, currentPage + 2)
+            )
+            .map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setPage(p)}
+                className={`h-10 w-10 rounded-lg border text-sm font-semibold transition ${
+                  p === currentPage
+                    ? "bg-blue-600 text-white border-blue-600"
+                    : "bg-white hover:bg-gray-50 border-gray-300"
+                }`}
+              >
+                {p}
+              </button>
+            ))}
+
+          <button
+            type="button"
+            disabled={currentPage === totalPages}
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            className={`h-10 px-4 rounded-lg border text-sm font-semibold transition ${
+              currentPage === totalPages
+                ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                : "bg-white hover:bg-gray-50 border-gray-300"
+            }`}
+            aria-label="Next page"
+            title="Next"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    )}
+
       </div>
     </div>
   );

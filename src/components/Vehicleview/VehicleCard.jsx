@@ -66,7 +66,7 @@ export default function VehicleCard({ v, onClick, onOwnerClick, onSelectVehicle 
 
       </div>
 
-      <div className="p-5 space-y-4">
+      <div className="p-3 space-x-2 space-y-2">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <h3 className="font-bold text-gray-900 line-clamp-1 text-lg group-hover:text-blue-600 transition-colors">
