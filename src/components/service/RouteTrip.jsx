@@ -7,8 +7,11 @@ import TourGuideModal from "./TourGuideModal";
 import GooglePlaceInput from "../service/GooglePlaceInput";
 import axios from "axios";
 
-const DRIVER_API = import.meta.env.VITE_DRIVER_SERVICE_API_URL+"/get-approved-drivers";
+const DRIVER_API =
+  import.meta.env.VITE_DRIVER_SERVICE_API_URL + "/get-approved-drivers";
 const VEHICLE_API = import.meta.env.VITE_VEHICLE_SERVICE_API_URL;
+
+/* ---------------- TEMP GUIDES ---------------- */
 
 const tempTourGuides = [
   {
@@ -31,6 +34,25 @@ const tempTourGuides = [
   },
 ];
 
+/* ---------------- DISTANCE HELPER ---------------- */
+
+function getDistanceKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) ** 2;
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+/* ===================== COMPONENT ===================== */
+
 export default function RouteTrip({
   tripDetails,
   setTripDetails,
@@ -51,17 +73,11 @@ export default function RouteTrip({
   /* ---------------- HELPERS ---------------- */
 
   const updateTrip = (field, value) => {
-    setTripDetails((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setTripDetails((prev) => ({ ...prev, [field]: value }));
   };
 
   const updateResource = (type, value) => {
-    setResources((prev) => ({
-      ...prev,
-      [type]: value,
-    }));
+    setResources((prev) => ({ ...prev, [type]: value }));
   };
 
   /* ---------------- LOAD DRIVERS ---------------- */
@@ -86,6 +102,23 @@ export default function RouteTrip({
       console.error("Vehicle fetch failed", err);
     }
   };
+
+  /* ---------------- NEAREST VEHICLES ---------------- */
+
+  const nearestVehicles = tripDetails.startLocation?.lat
+    ? vehicles
+        .map((v) => ({
+          ...v,
+          distance: getDistanceKm(
+            tripDetails.startLocation.lat,
+            tripDetails.startLocation.lng,
+            v.latitude,
+            v.longitude
+          ),
+        }))
+        .filter((v) => v.distance <= 50)
+        .sort((a, b) => a.distance - b.distance)
+    : vehicles;
 
   /* ---------------- SELECTION HANDLERS ---------------- */
 
@@ -156,18 +189,14 @@ export default function RouteTrip({
           label="Start Date"
           type="date"
           value={tripDetails.startDate}
-          onChange={(e) =>
-            updateTrip("startDate", e.target.value)
-          }
+          onChange={(e) => updateTrip("startDate", e.target.value)}
         />
 
         <InputField
           label="End Date"
           type="date"
           value={tripDetails.endDate}
-          onChange={(e) =>
-            updateTrip("endDate", e.target.value)
-          }
+          onChange={(e) => updateTrip("endDate", e.target.value)}
         />
 
         {/* VEHICLE */}
@@ -220,10 +249,11 @@ export default function RouteTrip({
 
       {showVehicleModal && (
         <VehicleModal
-          vehicles={vehicles}
+          vehicles={nearestVehicles}
           passengerCount={passengerCount}
           onClose={() => setShowVehicleModal(false)}
           onSelect={handleVehicleSelect}
+          startLocation={tripDetails.startLocation}
         />
       )}
 
@@ -258,7 +288,8 @@ function GlassCard({ item, type }) {
         src={item.driverImage || item.vehicleImages?.[0] || item.photo}
         className="w-24 h-24 object-cover rounded-lg"
       />
-      <div>
+
+      <div className="space-y-1">
         <p className="font-semibold">
           {item.vehicleName || item.name}
         </p>
@@ -268,6 +299,12 @@ function GlassCard({ item, type }) {
             <p>Booking: {item.bookingPrice}</p>
             <p>Per Km: {item.costPerKm}</p>
             <p>Seats: {item.passengerCount}</p>
+
+            {item.distance !== undefined && (
+              <p className="text-sm text-gray-600">
+                Distance for starting Location: {item.distance.toFixed(1)} km
+              </p>
+            )}
           </>
         )}
 
