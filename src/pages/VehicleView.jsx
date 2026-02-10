@@ -147,6 +147,7 @@ export default function VehicleView() {
 }, [search, status, category, minPassengers]);
 
  const totalItems = filtered.length;
+
 const totalPages = useMemo(() => {
   return Math.max(1, Math.ceil(totalItems / pageSize));
 }, [totalItems]);
@@ -157,6 +158,19 @@ const paginated = useMemo(() => {
   const start = (currentPage - 1) * pageSize;
   return filtered.slice(start, start + pageSize);
 }, [filtered, currentPage]);
+
+const uniqueCategories = useMemo(() => {
+
+  const seen = new Set();
+
+  return (Array.isArray(categories) ? categories : []).filter((c) => {
+    const name = String(c?.category ?? "").trim().toLowerCase();
+    if (!name) return false;          y
+    if (seen.has(name)) return false; 
+    seen.add(name);
+    return true;
+  });
+}, [categories]);
 
 
   const handleOwnerClick = (vehicle) => {
@@ -211,12 +225,8 @@ const paginated = useMemo(() => {
       <div className="max-w-8xl mx-auto px-4 py-10 space-y-8">
         <div className="flex items-start justify-between gap-4 flex-col md:flex-row">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
-              Vehicles
-            </h1>
-            <p className="text-gray-600 text-base mt-1">
-               Choose a vehicle that fits your trip perfectly
-            </p>
+            <h1 className="text-4xl font-bold text-gray-800 mb-2">Vehicles</h1>
+            <p className="text-gray-600 text-lg">Choose a vehicle that fits your trip perfectly</p>
           </div>
 
           <div className="w-full md:w-auto flex gap-3 flex-col sm:flex-row">
@@ -229,18 +239,20 @@ const paginated = useMemo(() => {
 
               {/* Category */}
               <div className="md:col-span-3">
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full sm:w-[170px] h-11 rounded-lg border-2 border-gray-300 bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                >
-                  <option value="ALL">All Categories</option>
-                  {categories.map((c) => (
-                    <option key={c.id} value={String(c.id)}>
-                      {c.category}
-                    </option>
-                  ))}
-                </select>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full sm:w-[170px] h-11 rounded-lg border-2 border-gray-300 bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+              >
+                <option value="ALL">All Categories</option>
+
+                {uniqueCategories.map((c) => (
+                  <option key={c.id} value={String(c.id)}>
+                    {c.category}
+                  </option>
+                ))}
+              </select>
+
               </div>
 
 
