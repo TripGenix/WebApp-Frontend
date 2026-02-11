@@ -119,23 +119,23 @@ export default function CustomPackage() {
   const handleStep = (step) => () => setActiveStep(step);
 
   const handleComplete = () => {
-    // STEP 1 VALIDATION
-    if (activeStep === 0) {
-      const error = validateStepOne();
-      if (error) {
-        toast.error(error);
-        return;
-      }
-    }
+    // // STEP 1 VALIDATION
+    // if (activeStep === 0) {
+    //   const error = validateStepOne();
+    //   if (error) {
+    //     toast.error(error);
+    //     return;
+    //   }
+    // }
 
-    // STEP 2 VALIDATION
-    if (activeStep === 1) {
-      const error = validateStepTwo();
-      if (error) {
-        toast.error(error);
-        return;
-      }
-    }
+    // // STEP 2 VALIDATION
+    // if (activeStep === 1) {
+    //   const error = validateStepTwo();
+    //   if (error) {
+    //     toast.error(error);
+    //     return;
+    //   }
+    // }
 
     setCompleted({ ...completed, [activeStep]: true });
     handleNext();
@@ -369,7 +369,7 @@ export default function CustomPackage() {
         polyline:
           routeDetails.routeData?.routes?.[0]?.overview_polyline?.points,
         costPerKm: routeDetails.costPerKm,
-        bookingPrice: routeDetails.bookingPrice,
+        bookingPrice: routeDetails.totalCost,
       },
 
       resources: {
