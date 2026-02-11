@@ -26,6 +26,7 @@
   border-radius: 10px;
   overflow: hidden;
   min-width: 700px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .bookings-table th,
@@ -38,6 +39,7 @@
 .bookings-table th {
   background: #e6f4ff;
   color: #0077b6;
+  font-weight: 600;
 }
 
 .bookings-table tr:nth-child(even) {
@@ -49,24 +51,31 @@
 }
 
 /* ===============================
-   PAYMENT STATUS (same as payments)
+   PAYMENT STATUS
    =============================== */
 
 .status {
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  min-width: 80px;
 }
 
+/* Updated to Green for Paid */
 .status.paid {
   background: #d4f7dc;
   color: #1b7f3b;
+  border: 1px solid #bbf7d0;
 }
 
+/* Updated to Yellow for Pending */
 .status.pending {
   background: #fff1c1;
   color: #9a6b00;
+  border: 1px solid #fef08a;
 }
 
 /* ===============================
@@ -74,25 +83,34 @@
    =============================== */
 
 .driver-status {
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  min-width: 100px;
 }
 
+/* Assigned matches Paid (Green) */
 .driver-status.assigned {
-  background: #d6ecff;
-  color: #0a58ca;
+  background: #d4f7dc;
+  color: #1b7f3b;
+  border: 1px solid #bbf7d0;
 }
 
+/* Purple for On the Way */
 .driver-status.ontheway {
   background: #e8ddff;
   color: #6f42c1;
+  border: 1px solid #dcd0ff;
 }
 
+/* Red/Pink for Not Assigned */
 .driver-status.notassigned {
   background: #ffd9d9;
   color: #c82333;
+  border: 1px solid #ffc1c1;
 }
 
 /* ===============================
@@ -103,6 +121,8 @@
   .bookings-table {
     min-width: 100%;
     border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .bookings-table thead {
@@ -123,20 +143,27 @@
     border-radius: 12px;
     padding: 14px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e6f4ff;
   }
 
   .bookings-table td {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: 10px 0;
     border: none;
+    border-bottom: 1px solid #f0f7ff;
     font-size: 14px;
+  }
+
+  .bookings-table td:last-child {
+    border-bottom: none;
   }
 
   .bookings-table td::before {
     content: attr(data-label);
     font-weight: 600;
     color: #0077b6;
+    margin-right: 10px;
   }
 }

@@ -1,33 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./MyPayments.css";
 
 export default function MyPayments() {
-  const [payments] = useState([
-    {
-      id: "TXN001",
-      date: "2025-01-05",
-      description: "Ella Day Tour",
-      amount: 25000,
-      method: "Card",
-      status: "Paid",
-    },
-    {
-      id: "TXN002",
-      date: "2025-01-12",
-      description: "Yala Safari Package",
-      amount: 42000,
-      method: "Card",
-      status: "Paid",
-    },
-    {
-      id: "TXN003",
-      date: "2025-01-20",
-      description: "Airport Pickup",
-      amount: 8000,
-      method: "Cash",
-      status: "Pending",
-    },
-  ]);
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Replace '1' with actual touristId logic as needed
+    const touristId = 1; 
+    axios.get(`http://localhost:8087/api/v1/booking/user-payments/${touristId}`)
+      .then((response) => {
+        setPayments(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching payments:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div className="payments-container"><p>Loading history...</p></div>;
 
   return (
     <div className="payments-container">
@@ -46,29 +39,30 @@ export default function MyPayments() {
               <th>Status</th>
             </tr>
           </thead>
-<tbody>
-  {payments.map((payment) => (
-    <tr key={payment.id}>
-      <td data-label="Transaction ID">{payment.id}</td>
-      <td data-label="Date">{payment.date}</td>
-      <td data-label="Description">{payment.description}</td>
-      <td data-label="Method">{payment.method}</td>
-      <td data-label="Amount (LKR)">
-        {payment.amount.toLocaleString()}
-      </td>
-      <td data-label="Status">
-        <span
-          className={`status ${
-            payment.status === "Paid" ? "paid" : "pending"
-          }`}
-        >
-          {payment.status}
-        </span>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
+          <tbody>
+            {payments.map((payment, index) => (
+              <tr key={index}>
+                <td data-label="Transaction ID">{payment.transactionId}</td>
+                <td data-label="Date">
+                  {new Date(payment.date).toLocaleDateString()}
+                </td>
+                <td data-label="Description">{payment.description}</td>
+                <td data-label="Method">{payment.method}</td>
+                <td data-label="Amount (LKR)">
+                  {payment.amount.toLocaleString()}
+                </td>
+                <td data-label="Status">
+                  <span
+                    className={`status ${
+                      payment.status?.toLowerCase() === "paid" ? "paid" : "pending"
+                    }`}
+                  >
+                    {payment.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

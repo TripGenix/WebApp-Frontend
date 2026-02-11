@@ -53,6 +53,9 @@
   border-radius: 20px;
   font-size: 12px;
   font-weight: 500;
+  display: inline-block;
+  min-width: 70px;
+  text-align: center;
 }
 
 .status.paid {

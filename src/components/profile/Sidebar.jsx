@@ -2,29 +2,33 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./TouristDashboard.css";
 
-import logo1 from "../../assets/profile/tripgenixlogo2.jpeg";
+
 
 import {
   FaTachometerAlt,
   FaSuitcase,
   FaCreditCard,
-  FaHeart,
   FaHeadset,
-  FaCog,
+  FaUserEdit,
   FaSignOutAlt,
-} from "react-icons/fa";
+  FaTimes 
+  } from "react-icons/fa";
 
-export default function Sidebar({ activeTab, setActiveTab }) {
+export default function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar }) {
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
+  if (window.innerWidth <= 768) {
+      toggleSidebar(); // Auto-close on mobile after selection
+    }
   };
 
   return (
-    <div className="sidebar">
-      {/* Logo */}
-      <div className="logo-container">
-        <img src={logo1} alt="TripGenix Logo" />
-      </div>
+    <div className={`sidebar ${isOpen ? "open" : ""}`}>
+      {/* Close button visible only on mobile */}
+      <button className="close-menu" onClick={toggleSidebar}>
+        <FaTimes />
+      </button>
+      
 
       <ul className="menu">
          <li>
@@ -57,15 +61,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
           </button>
         </li>
 
-        <li>
-          <button
-            onClick={() => handleTabClick("wishlist")}
-            className={`menu-link ${activeTab === "wishlist" ? "active" : ""}`}
-          >
-            <FaHeart className="menu-icon" />
-            Wishlist
-          </button>
-        </li>
+        
 
         <li>
           <button
@@ -77,13 +73,14 @@ export default function Sidebar({ activeTab, setActiveTab }) {
           </button>
         </li>
 
+        {/* Updated: Settings replaced with Edit Profile */}
         <li>
           <button
-            onClick={() => handleTabClick("settings")}
-            className={`menu-link ${activeTab === "settings" ? "active" : ""}`}
+            onClick={() => handleTabClick("edit-profile")}
+            className={`menu-link ${activeTab === "edit-profile" ? "active" : ""}`}
           >
-            <FaCog className="menu-icon" />
-            Settings
+            <FaUserEdit className="menu-icon" />
+            Edit Profile
           </button>
         </li>
 
