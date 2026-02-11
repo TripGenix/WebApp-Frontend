@@ -254,7 +254,7 @@ export default function FeaturedTours() {
                 {/* Image Section */}
                 <div className="relative verflow-hidden group h-56">
                   <img 
-                    src={pkg.imageUrl || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"} 
+                    src={pkg.imageUrl || "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=800&h=600&fit=crop"} 
                     alt={pkg.name} 
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:translate-y-[-5px]"
                   />
@@ -269,10 +269,6 @@ export default function FeaturedTours() {
                 {/* Content Section */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{pkg.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {pkg.features || "Experience breathtaking mountain views, pristine lakes, and charming villages in this unforgettable journey."}
-                  </p>
-
                   <div className="flex items-center text-sm text-gray-500 mb-4">
                      <div className="w-12 h-12  rounded-full flex items-center justify-center text-sky-500">
                       <Clock className="w-6 h-6" />
@@ -309,7 +305,7 @@ export default function FeaturedTours() {
         {/* Header Image Area */}
         <div className="relative h-64 shrink-0">
           <img 
-            src={viewedPkg.imageUrl || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"} 
+            src={viewedPkg.imageUrl || "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=800&h=600&fit=crop"} 
             alt={viewedPkg.name} 
             className="w-full h-full object-cover"
           />
