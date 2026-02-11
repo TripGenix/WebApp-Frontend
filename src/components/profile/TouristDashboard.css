@@ -6,6 +6,7 @@
   background-color: #f5faff;
   min-height: 100vh;
   width: 100%;
+  /*z-index: 1;*/
 }
 
 .sidebar {
@@ -16,7 +17,7 @@
   height: 100vh;
   background-color: #f5faff;
   border-right: 1px solid #e0f0ff;
-  z-index: 1000;
+  z-index: 500;
   overflow-y: auto;
   box-sizing: border-box;
   display: flex;
@@ -94,10 +95,10 @@
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
-  position: fixed;
+  position: absolute;
   top: 90px; /* Below your Navbar */
   left: 20px;
-  z-index: 1100;
+  z-index: 10;
 }
 
 /* =========================
@@ -264,4 +265,25 @@
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   OVERLAY (CLICK-AWAY)
+   ========================= */
+.sidebar-overlay {
+  display: none; /* Hidden by default */
+}
+
+@media (max-width: 768px) {
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); /* Dim the background slightly */
+    z-index: 499; /* Just below the sidebar (which is 500) */
+    cursor: pointer;
+  }
 }

@@ -42,7 +42,7 @@ function App() {
       <Navbar />
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="pt-[80px]">
+      <div className="pt-[80px] relative z-0">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />

@@ -24,10 +24,6 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar
 
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
-      {/* Close button visible only on mobile */}
-      <button className="close-menu" onClick={toggleSidebar}>
-        <FaTimes />
-      </button>
       
 
       <ul className="menu">
