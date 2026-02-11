@@ -41,10 +41,10 @@ export default function TripSummary({
 
     setRouteDetails((prev) => ({
       ...prev,
-      totalCost: data.touristPayAmount,
-      bookingPrice: data.touristPayAmount,
-      costPerKm: data.baseTripCost,
-      suggestedDate: data.estimatedDays,
+      totalCost: data.touristPays,
+      bookingPrice: Number((data.touristPays * 0.25).toFixed(2)),
+      // costPerKm: data.baseTripCost,
+      suggestedDate: data.tripDays,
     }));
   }
 
@@ -210,10 +210,10 @@ export default function TripSummary({
             label="Base Fare"
             value={`Rs. ${routeDetails.bookingPrice.toFixed(2)}`}
           />
-          <Row
+          {/* <Row
             label="Mileage Cost"
             value={`Rs. ${routeDetails.costPerKm.toFixed(2)}`}
-          />
+          /> */}
           <Row label="Guide Fee" value={`Rs. ${guideCost.toFixed(2)}`} />
         </div>
 
