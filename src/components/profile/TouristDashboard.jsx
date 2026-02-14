@@ -7,7 +7,7 @@ import defaultProfilePic from "../../assets/profile/profilepic.avif";
 
 import Mybookings from "../../pages/Mybookings";
 import Mypayments from "../../pages/Mypayments";
-import Support from "../../pages/Support";
+import ContactUs from "../../pages/Contact";
 import EditProfile from "../../pages/EditProfile";
 
 export default function TouristDashboard() {
@@ -18,7 +18,7 @@ export default function TouristDashboard() {
     firstName: "Lihini",
     lastName: "Thennakoon",
     email: "lihini123@gmail.com",
-    contactNumber: "071 1234567",
+    contactNumber: "0711234567",
     nationality: "Sri Lankan",
     passportId: "XXXXXXXX",
     profileImage: defaultProfilePic, 
@@ -38,7 +38,7 @@ export default function TouristDashboard() {
       case "payments":
         return <Mypayments />;
       case "support":
-        return <Support />;
+        return <ContactUs />;
       case "edit-profile":
         return (
           <EditProfile 
