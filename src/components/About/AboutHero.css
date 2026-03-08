@@ -1,43 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+
 .about-hero {
   position: relative;
   width: 100%;
-  height: 400px;
-  overflow: hidden;
+  height: 500px;
+  overflow: hidden; /* Clips the scaled image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #000; /* Fallback */
 }
 
-/* Background image */
-.about-hero img {
+/* Parallax Wrapper */
+.parallax-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%; /* Extra height allows room for the image to move */
+  z-index: 0;
+  will-change: transform;
+}
+
+.parallax-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Cinematic zoom + subtle floating movement */
+  animation: slowPan 20s infinite alternate ease-in-out;
 }
 
-/* Overlay */
+/* Subtle Dark Gradient Overlay */
 .about-hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(4, 70, 90, 0.48);
-  z-index: 1; /* overlay above image */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(4, 70, 90, 0.5) 100%
+  );
+  z-index: 1;
 }
 
-/* Text */
+/* Text Container with Fade-In */
 .hero-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  z-index: 2;
   text-align: center;
   color: white;
-  z-index: 2; /* text above overlay */
+  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hero-content h1 {
-  font-size: 56px;
+.breadcrumb-text {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+  display: block;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.main-title {
+  font-size: clamp(48px, 10vw, 80px); /* Fluid typography */
   font-weight: 800;
-  margin-bottom: 12px;
+  margin: 0;
+  letter-spacing: -2px;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
-.hero-content p {
-  font-size: 20px;
+.title-underline {
+  width: 60px;
+  height: 5px;
+  background: #00d2ff;
+  margin: 24px auto 0;
+  border-radius: 10px;
+  /* Expands on load */
+  animation: grow 1.5s ease-out forwards;
+}
+
+/* --- ANIMATIONS --- */
+
+/* Slow zoom and pan for a drone-shot feel */
+@keyframes slowPan {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.1) translateY(-10%); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes grow {
+  from { width: 0; }
+  to { width: 60px; }
+}
+
+/* Tablet & Mobile Adjustments */
+@media (max-width: 768px) {
+  .about-hero { height: 380px; }
+  .main-title { font-size: 42px; }
+  .breadcrumb-text { letter-spacing: 2px; font-size: 12px; }
 }
