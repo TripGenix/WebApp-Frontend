@@ -13,6 +13,8 @@ import PrivateRoute from "./route/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import FeaturedTours from "./pages/FeaturedTours";
+import DefaultBooking from "./pages/DefaultPackages/DefaultBooking";
+import DefaultBookingSummary from "./pages/DefaultPackages/DefaultBookingSummary";
 import PaymentPage from "./pages/payment/PaymentPage";
 import About from './pages/About';
 import Profile from './pages/profile';
@@ -26,9 +28,15 @@ import SuccessPayment from "./pages/payment/SuccessPayment";
 import DefPaymentPage from "./pages/DefaultPackages/_DefPaymentPage";
 
 import TourGuidePage from "./components/tourguide/TourGuidePage";
+<<<<<<< HEAD
 import Mypayments from "./pages/Mypayments";
 import Support from "./pages/Support";
 import Logout from "./pages/Logout";
+=======
+import VehicleView from "./pages/VehicleView";  
+
+
+>>>>>>> 8e4457743bf19aad5b95e43aeaa24b0f2924e893
 
 function App() {
   useEffect(() => {
@@ -44,6 +52,7 @@ function App() {
       <Navbar />
       <Toaster position="top-center" reverseOrder={false} />
 
+<<<<<<< HEAD
       <div className="pt-[80px] relative z-0">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -69,6 +78,43 @@ function App() {
               </PrivateRoute>
             }
           />
+=======
+            <div className="pt-[80px]">
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Booking" element={<Booking />} />
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/CustomPackage" element={<CustomPackage />} />
+        <Route path="/DefaultBooking" element={<DefaultBooking />} />
+        <Route path="/DefaultBookingSummary" element={<DefaultBookingSummary />} />
+        <Route path="/VehicleView" element={<VehicleView />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/register" element={<UserRegister />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/defpayment" element={<DefPaymentPage />} />
+        <Route path="/payment/:tourId" element={<PaymentPage />} />
+        <Route path="cancel-tour" element={<CanclePayment />} />
+        <Route path="/payment-success" element={<SuccessPayment />} />
+
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/FeaturedTours" element={<FeaturedTours />} />
+
+        {/* Tour Guide Page */}
+        <Route path="/TourGuide" element={<TourGuidePage />} />
+        <Route path="/test" element={<Test />} />
+>>>>>>> 8e4457743bf19aad5b95e43aeaa24b0f2924e893
 
           <Route path="/FeaturedTours" element={<FeaturedTours />} />
           <Route path="/TourGuide" element={<TourGuidePage />} />
