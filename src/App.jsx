@@ -13,6 +13,8 @@ import PrivateRoute from "./route/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import FeaturedTours from "./pages/FeaturedTours";
+import DefaultBooking from "./pages/DefaultPackages/DefaultBooking";
+import DefaultBookingSummary from "./pages/DefaultPackages/DefaultBookingSummary";
 import PaymentPage from "./pages/payment/PaymentPage";
 import About from './pages/About';
 import Profile from './pages/profile';
@@ -23,10 +25,15 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import CanclePayment from "./pages/payment/CanclePayment";
 import SuccessPayment from "./pages/payment/SuccessPayment";
+import DefPaymentPage from "./pages/DefaultPackages/_DefPaymentPage";
+
 import TourGuidePage from "./components/tourguide/TourGuidePage";
 import Mypayments from "./pages/Mypayments";
 import Support from "./pages/Support";
 import Logout from "./pages/Logout";
+import VehicleView from "./pages/VehicleView";  
+
+
 
 function App() {
   useEffect(() => {
@@ -42,40 +49,47 @@ function App() {
       <Navbar />
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="pt-[80px] relative z-0">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Booking" element={<Booking />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/CustomPackage" element={<CustomPackage />} />
-          <Route path="/login" element={<UserLogin />} />
-          <Route path="/register" element={<UserRegister />} />
-          <Route path="/faq" element={<Faq />} />
-          
-          <Route path="/payment/:tourId" element={<PaymentPage />} />
-          <Route path="cancel-tour" element={<CanclePayment />} />
-          <Route path="/payment-success" element={<SuccessPayment />} />
-          
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
+            <div className="pt-[80px]">
 
-          <Route path="/FeaturedTours" element={<FeaturedTours />} />
-          <Route path="/TourGuide" element={<TourGuidePage />} />
-          <Route path="/test" element={<Test />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Booking" element={<Booking />} />
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/CustomPackage" element={<CustomPackage />} />
+        <Route path="/DefaultBooking" element={<DefaultBooking />} />
+        <Route path="/DefaultBookingSummary" element={<DefaultBookingSummary />} />
+        <Route path="/VehicleView" element={<VehicleView />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/register" element={<UserRegister />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/defpayment" element={<DefPaymentPage />} />
+        <Route path="/payment/:tourId" element={<PaymentPage />} />
+        <Route path="cancel-tour" element={<CanclePayment />} />
+        <Route path="/payment-success" element={<SuccessPayment />} />
+
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/FeaturedTours" element={<FeaturedTours />} />
+
+        {/* Tour Guide Page */}
+        <Route path="/TourGuide" element={<TourGuidePage />} />
+        <Route path="/test" element={<Test />} />
           <Route path="/payments" element={<Mypayments />} />
           <Route path="/support" element={<Support />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/logout" element={<Logout />} />
-        </Routes>
+          <Route path="/defpayment" element={<DefPaymentPage />} />
+      </Routes>
       </div>
     </BrowserRouter>
   );
