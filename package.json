@@ -15,6 +15,7 @@
     "@googlemaps/js-api-loader": "^2.0.2",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
+    "@lottiefiles/dotlottie-react": "^0.18.4",
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@mui/styled-engine-sc": "^7.3.7",
