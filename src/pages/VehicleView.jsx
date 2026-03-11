@@ -165,7 +165,7 @@ const uniqueCategories = useMemo(() => {
 
   return (Array.isArray(categories) ? categories : []).filter((c) => {
     const name = String(c?.category ?? "").trim().toLowerCase();
-    if (!name) return false;          y
+    if (!name) return false;          
     if (seen.has(name)) return false; 
     seen.add(name);
     return true;
