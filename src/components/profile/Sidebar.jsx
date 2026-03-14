@@ -11,7 +11,7 @@ import {
   FaHeadset,
   FaUserEdit,
   FaSignOutAlt,
-  FaTimes 
+  FaTrash
   } from "react-icons/fa";
 
 export default function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar }) {
@@ -78,6 +78,15 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar
             <FaUserEdit className="menu-icon" />
             Edit Profile
           </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleTabClick("delete-account")}
+             className={`menu-link ${activeTab === "delete-account" ? "active" : ""}`}
+          >
+            <FaTrash className="menu-icon" />
+             Delete Account
+          </button>   
         </li>
 
         <li className="logout">

@@ -68,6 +68,36 @@ export default function TouristDashboard() {
     return <div>Loading...</div>;
   }
 
+  const handleDeleteAccount = async () => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete your account? This action cannot be undone."
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await axios.delete(
+      `http://localhost:8082/api/v1/tourists/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    alert("Account deleted successfully");
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+
+    window.location.href = "/login";
+
+  } catch (error) {
+    console.error("Delete failed", error);
+    alert("Failed to delete account");
+  }
+};
+
   const renderContent = () => {
     switch (activeTab) {
 
@@ -87,6 +117,11 @@ export default function TouristDashboard() {
             onSave={handleUpdateProfile}
           />
         );
+
+     case "delete-account":
+        handleDeleteAccount();
+        return null; 
+
 
       case "dashboard":
       default:
