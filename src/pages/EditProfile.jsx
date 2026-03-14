@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import "./EditProfile.css";
+import axios from "axios";
 
 const EditProfile = ({ currentProfile, onSave }) => {
   // 'profile' handles the form inputs
@@ -56,25 +57,51 @@ const EditProfile = ({ currentProfile, onSave }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (validate()) {
-      setIsSubmitting(true);
-      
-      // Simulate API Delay
-      setTimeout(() => {
-        // Update the local display info only now
-        setDisplayInfo(profile);
-        // Pass the data up to the parent
-        onSave(profile);
-        
-        setIsSubmitting(false);
-        alert("Profile Updated Successfully!");
-      }, 1000);
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+  e.preventDefault();
+
+  if (!validate()) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+
+    const response = await axios.put(
+      `http://localhost:8082/api/v1/tourists/${userId}`,
+      {
+        first_name: profile.firstName,
+        last_name: profile.lastName,
+        email: profile.email,
+        phone: profile.contactNumber,
+        passport_nic_number: profile.passportId,
+        country: profile.country,
+        profile_image_url: profile.profileImage
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    setDisplayInfo(profile);
+    onSave(profile);
+
+    alert("Profile Updated Successfully!");
+
+  } catch (error) {
+    console.error("Update failed", error);
+    alert("Failed to update profile");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="edit-profile-container">
@@ -97,7 +124,6 @@ const EditProfile = ({ currentProfile, onSave }) => {
           <div className="current-info-display">
               <p><strong>{displayInfo.firstName} {displayInfo.lastName}</strong></p>
               <p>{displayInfo.email}</p>
-              <p>{displayInfo.nationality}</p>
           </div>
         </div>
 
@@ -153,12 +179,15 @@ const EditProfile = ({ currentProfile, onSave }) => {
           </div>
 
           <div className="form-group">
-            <label>Nationality</label>
-            <select name="nationality" value={profile.nationality} onChange={handleChange}>
-              <option value="Sri Lankan">Sri Lankan</option>
-              <option value="Indian">Indian</option>
-              <option value="Other">Other</option>
-            </select>
+            <label>Country</label>
+            <input 
+              type="text" 
+              name="country" 
+              className={errors.country ? "input-error" : ""}
+              value={profile.country || ""} 
+              onChange={handleChange} 
+            />
+            {errors.country && <span className="error-text">{errors.country}</span>}           
           </div>
 
           <div className="form-group">
