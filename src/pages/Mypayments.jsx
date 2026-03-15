@@ -8,8 +8,11 @@ export default function MyPayments() {
 
   useEffect(() => {
     // Replace '1' with actual touristId logic as needed
-    const touristId = 1; 
-    axios.get(`http://localhost:8087/api/v1/booking/user-payments/${touristId}`)
+    // const touristId = 1;
+    const touristId = localStorage.getItem("userId");
+
+    axios
+      .get(`http://localhost:8087/api/v1/booking/user-payments/${touristId}`)
       .then((response) => {
         setPayments(response.data);
         setLoading(false);
@@ -20,7 +23,12 @@ export default function MyPayments() {
       });
   }, []);
 
-  if (loading) return <div className="payments-container"><p>Loading history...</p></div>;
+  if (loading)
+    return (
+      <div className="payments-container">
+        <p>Loading history...</p>
+      </div>
+    );
 
   return (
     <div className="payments-container">
@@ -54,7 +62,9 @@ export default function MyPayments() {
                 <td data-label="Status">
                   <span
                     className={`status ${
-                      payment.status?.toLowerCase() === "paid" ? "paid" : "pending"
+                      payment.status?.toLowerCase() === "paid"
+                        ? "paid"
+                        : "pending"
                     }`}
                   >
                     {payment.status}

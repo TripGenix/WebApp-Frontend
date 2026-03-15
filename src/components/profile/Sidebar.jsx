@@ -59,7 +59,7 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar
 
         
 
-        <li>
+        {/* <li>
           <button
             onClick={() => handleTabClick("support")}
             className={`menu-link ${activeTab === "support" ? "active" : ""}`}
@@ -67,7 +67,7 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar
             <FaHeadset className="menu-icon" />
             Support
           </button>
-        </li>
+        </li> */}
 
         {/* Updated: Settings replaced with Edit Profile */}
         <li>
