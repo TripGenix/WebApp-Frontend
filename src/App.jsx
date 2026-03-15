@@ -31,7 +31,8 @@ import TourGuidePage from "./components/tourguide/TourGuidePage";
 import Mypayments from "./pages/Mypayments";
 import Support from "./pages/Support";
 import Logout from "./pages/Logout";
-import VehicleView from "./pages/VehicleView";  
+import VehicleView from "./pages/VehicleView"; 
+import Servicedetails from "./pages/servicedetails";
 
 
 
@@ -69,13 +70,14 @@ function App() {
         <Route path="/payment/:tourId" element={<PaymentPage />} />
         <Route path="cancel-tour" element={<CanclePayment />} />
         <Route path="/payment-success" element={<SuccessPayment />} />
+        <Route path="/service-details" element={<Servicedetails />} />
 
 
         <Route
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Profile />
             </PrivateRoute>
           }
         />

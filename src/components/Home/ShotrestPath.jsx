@@ -14,18 +14,32 @@ function ShotrestPath() {
           className="w-full h-full object-container object-center"
         /> */}
 
-        <div className="flex items-center justify-center gap-6">
-          {/* Left Line */}
-          <div className="flex-1 h-[2px] bg-gray-300"></div>
+        <div className="flex items-center justify-center gap-6 my-16">
 
-          <h2 className="text-black text-xl sm:text-3xl md:text-[50pt] font-semibold text-center">
-            MAKE YOUR
-            <span className="text-[#1DA9CC]"> OWN PATH</span>
-          </h2>
+  {/* Left line */}
+  <div className="hidden md:block flex-1 h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
 
-          {/* Right Line */}
-          <div className="flex-1 h-[2px] bg-gray-300"></div>
-        </div>
+  {/* Title */}
+  <div className="text-center px-6">
+
+    <h2 className="text-gray-900 text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide">
+      MAKE YOUR
+      <span className="text-[#1DA9CC] ml-2">OWN PATH</span>
+    </h2>
+
+    {/* Accent underline */}
+    <div className="flex justify-center items-center gap-3 mt-4">
+      <div className="w-10 h-[2px] bg-gray-300"></div>
+      <div className="w-3 h-3 rounded-full bg-[#1DA9CC]"></div>
+      <div className="w-10 h-[2px] bg-gray-300"></div>
+    </div>
+
+  </div>
+
+  {/* Right line */}
+  <div className="hidden md:block flex-1 h-[1px] bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+
+</div>
       </div>
       {/* ROUTE SECTION */}
       <div

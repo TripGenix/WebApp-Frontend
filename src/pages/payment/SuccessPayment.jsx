@@ -17,7 +17,9 @@ function SuccessPayment() {
   /* =========================
      AUTO CONFIRM + SAVE PAYMENT
   ========================= */
+
   useEffect(() => {
+    console.log("🚀 Processing payment confirmation flow...");
     if (!tourId || hasProcessedRef.current) return;
 
     hasProcessedRef.current = true;
@@ -58,7 +60,7 @@ function SuccessPayment() {
           throw new Error("Tour confirmation failed");
         }
 
-        console.log("✅ Tour confirmed successfully");
+        // console.log("✅ Tour confirmed successfully");
       } catch (err) {
         console.error("❌ Payment confirmation flow failed", err);
       }

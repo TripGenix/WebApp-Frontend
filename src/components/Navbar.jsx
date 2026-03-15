@@ -151,10 +151,10 @@ export default function Navbar() {
                   <MenuItems className="absolute right-0 mt-3 w-40 bg-white text-black rounded-xl shadow-lg">
                     <MenuItem>
                       <NavLink
-                        to="/dashboard"
+                        to="/profile"
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Dashboard
+                        Profile
                       </NavLink>
                     </MenuItem>
                     <MenuItem>
