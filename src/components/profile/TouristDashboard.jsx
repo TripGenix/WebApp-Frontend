@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 import { FaBars } from "react-icons/fa";
-
 import "./TouristDashboard.css";
 import defaultProfilePic from "../../assets/profile/profilepic.avif";
 
@@ -73,8 +72,10 @@ export default function TouristDashboard() {
     "Are you sure you want to delete your account? This action cannot be undone."
   );
 
-  if (!confirmDelete) return;
-
+  if (!confirmDelete) {
+    setActiveTab("dashboard");
+    return;
+  }
   try {
     await axios.delete(
       `http://localhost:8082/api/v1/tourists/${userId}`,

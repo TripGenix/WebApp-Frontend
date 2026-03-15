@@ -80,7 +80,7 @@ const EditProfile = ({ currentProfile, onSave }) => {
         phone: profile.contactNumber,
         passport_nic_number: profile.passportId,
         country: profile.country,
-        profile_image_url: profile.profileImage
+        profile_image_url: profile.profileImage 
       },
       {
         headers: {
