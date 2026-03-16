@@ -64,9 +64,12 @@ export default function Navbar() {
           {/* ================= DESKTOP BAR ================= */}
           <div className="relative z-50 px-6 md:px-10 py-5 flex items-center justify-between text-white">
             {/* Logo */}
-            <div className="flex items-center gap-2 font-bold text-xl">
-              {/* <img src={Logo} className="h-8" /> */}
-              TripGenix
+            <div className="flex items-center gap-2  font-bold text-md">
+              <img
+                src="/logo.png"
+                alt="TripGenix Logo"
+                className="h-12 object-contain"
+              />{" "}
             </div>
 
             {/* Center Menu */}
@@ -77,7 +80,7 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   classNames(
                     "px-4 py-1 rounded-full font-medium transition",
-                    isActive ? "bg-white text-black" : "hover:text-white/80"
+                    isActive ? "bg-white text-black" : "hover:text-white/80",
                   )
                 }
               >
@@ -100,7 +103,7 @@ export default function Navbar() {
                             "block px-4 py-2 text-sm",
                             isActive
                               ? "bg-gray-100 font-semibold"
-                              : "hover:bg-gray-100"
+                              : "hover:bg-gray-100",
                           )
                         }
                       >
@@ -120,8 +123,7 @@ export default function Navbar() {
                     classNames(
                       "px-4 py-1 rounded-full font-medium transition",
 
-                      isActive
-                        ? "bg-white text-black" : "hover:text-white/80"
+                      isActive ? "bg-white text-black" : "hover:text-white/80",
                     )
                   }
                 >
@@ -184,7 +186,7 @@ export default function Navbar() {
           <div
             className={classNames(
               open ? "opacity-100 visible" : "opacity-0 invisible",
-              "fixed inset-0 bg-black/50 transition md:hidden"
+              "fixed inset-0 bg-black/50 transition md:hidden",
             )}
           />
 
@@ -193,7 +195,7 @@ export default function Navbar() {
             static
             className={classNames(
               open ? "translate-x-0" : "translate-x-full",
-              "fixed top-0 right-0 h-full w-full bg-white text-black transform transition-transform duration-300 md:hidden z-50"
+              "fixed top-0 right-0 h-full w-full bg-white text-black transform transition-transform duration-300 md:hidden z-50",
             )}
           >
             <div className="flex items-center justify-between px-6 py-4 border-b">
@@ -209,7 +211,7 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   classNames(
                     "block px-3 py-2 rounded",
-                    isActive ? "bg-blue-600 text-white" : "text-gray-700"
+                    isActive ? "bg-blue-600 text-white" : "text-gray-700",
                   )
                 }
               >
@@ -225,7 +227,9 @@ export default function Navbar() {
                     className={({ isActive }) =>
                       classNames(
                         "block ml-3 px-2 py-1 rounded",
-                        isActive ? "bg-blue-100 text-blue-700" : "text-gray-600"
+                        isActive
+                          ? "bg-blue-100 text-blue-700"
+                          : "text-gray-600",
                       )
                     }
                   >
@@ -241,7 +245,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     classNames(
                       "block px-3 py-2 rounded",
-                      isActive ? "bg-blue-600 text-white" : "text-gray-700"
+                      isActive ? "bg-blue-600 text-white" : "text-gray-700",
                     )
                   }
                 >
