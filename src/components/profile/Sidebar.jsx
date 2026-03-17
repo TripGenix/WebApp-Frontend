@@ -1,71 +1,101 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./TouristDashboard.css";
 
-import logo1 from "../../assets/profile/tripgenixlogo2.jpeg";
+
+
 import {
+  FaTachometerAlt,
   FaSuitcase,
   FaCreditCard,
-  FaHeart,
-  FaBookmark,
-  FaGift,
   FaHeadset,
-  FaCog,
+  FaUserEdit,
   FaSignOutAlt,
-} from "react-icons/fa";
+  FaTrash
+  } from "react-icons/fa";
 
+export default function Sidebar({ activeTab, setActiveTab, isOpen, toggleSidebar }) {
+  const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
+  if (window.innerWidth <= 768) {
+      toggleSidebar(); // Auto-close on mobile after selection
+    }
+  };
 
-export default function Sidebar() {
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? "open" : ""}`}>
       
-       
-        <div className="logo-container">
-          <img src={logo1} alt="TripGenix Logo" />
-        </div>
 
       <ul className="menu">
-  <li>
-    <FaSuitcase className="menu-icon" />
-    My Bookings
-  </li>
+         <li>
+          <button
+            onClick={() => handleTabClick("dashboard")}
+            className={`menu-link ${activeTab === "dashboard" ? "active" : ""}`}
+          >
+            <FaTachometerAlt className="menu-icon" />
+            Dashboard
+          </button>
+        </li>
 
-  <li>
-    <FaCreditCard className="menu-icon" />
-    Payments
-  </li>
+        <li>
+          <button
+            onClick={() => handleTabClick("bookings")}
+            className={`menu-link ${activeTab === "bookings" ? "active" : ""}`}
+          >
+            <FaSuitcase className="menu-icon" />
+            My Bookings
+          </button>
+        </li>
 
-  <li>
-    <FaBookmark className="menu-icon" />
-    Saved
-  </li>
+        <li>
+          <button
+            onClick={() => handleTabClick("payments")}
+            className={`menu-link ${activeTab === "payments" ? "active" : ""}`}
+          >
+            <FaCreditCard className="menu-icon" />
+            My Payments
+          </button>
+        </li>
 
-  <li>
-    <FaHeart className="menu-icon" />
-    Wishlist
-  </li>
+        
 
-  <li>
-    <FaGift className="menu-icon" />
-    Rewards & Loyalty
-  </li>
+        {/* <li>
+          <button
+            onClick={() => handleTabClick("support")}
+            className={`menu-link ${activeTab === "support" ? "active" : ""}`}
+          >
+            <FaHeadset className="menu-icon" />
+            Support
+          </button>
+        </li> */}
 
-  <li>
-    <FaHeadset className="menu-icon" />
-    Support
-  </li>
+        {/* Updated: Settings replaced with Edit Profile */}
+        <li>
+          <button
+            onClick={() => handleTabClick("edit-profile")}
+            className={`menu-link ${activeTab === "edit-profile" ? "active" : ""}`}
+          >
+            <FaUserEdit className="menu-icon" />
+            Edit Profile
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleTabClick("delete-account")}
+             className={`menu-link ${activeTab === "delete-account" ? "active" : ""}`}
+          >
+            <FaTrash className="menu-icon" />
+             Delete Account
+          </button>   
+        </li>
 
-  <li>
-    <FaCog className="menu-icon" />
-    Settings
-  </li>
-
-  <li className="logout">
-    <FaSignOutAlt className="menu-icon" />
-    Logout
-  </li>
-</ul>
-
-     
+        <li className="logout">
+          <NavLink to="/logout" className="menu-link">
+            <FaSignOutAlt className="menu-icon" />
+            Logout
+          </NavLink>
+        </li>
+      </ul>
     </div>
   );
 }

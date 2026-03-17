@@ -15,13 +15,12 @@ export default function PaymentPage() {
   ========================= */
   useEffect(() => {
     fetchBooking();
-    // eslint-disable-next-line
   }, []);
 
   async function fetchBooking() {
     try {
       const res = await fetch(
-        `http://localhost:8087/bookingservice/api/v1/get_booking_by_id/${tourId}`
+        `http://localhost:8087/bookingservice/api/v1/get_booking_by_id/${tourId}`,
       );
 
       if (!res.ok) throw new Error("Booking not found");
@@ -38,13 +37,13 @@ export default function PaymentPage() {
   ========================= */
   useEffect(() => {
     if (booking) prepareHash();
-    // eslint-disable-next-line
   }, [booking]);
 
   async function prepareHash() {
     const reference = booking.referenceId;
-    const amount = Number(
-      booking.routeDetails.bookingPrice
+
+    const advanceAmount = (
+      Number(booking.routeDetails.bookingPrice) * 0.25
     ).toFixed(2);
 
     const currency = "LKR";
@@ -56,8 +55,8 @@ export default function PaymentPage() {
     const response = await fetch(
       `http://localhost:8087/paymentcontroller/getHash` +
         `?orderId=${orderIdRef.current}` +
-        `&amount=${amount}` +
-        `&currency=${currency}`
+        `&amount=${advanceAmount}` +
+        `&currency=${currency}`,
     );
 
     const hashValue = await response.text();
@@ -73,37 +72,33 @@ export default function PaymentPage() {
     form.method = "POST";
     form.action = "https://sandbox.payhere.lk/pay/checkout";
 
-    const amount = Number(
-      booking.routeDetails.bookingPrice
-    ).toFixed(2);
-
+    const totalAmount = Number(booking.routeDetails.bookingPrice);
+    const advanceAmount = (totalAmount * 0.25).toFixed(2);
     const currency = "LKR";
 
     const fields = {
       merchant_id: "1233436",
 
       return_url:
-        `http://localhost:5173/payment-success` +
+        `${import.meta.env.VITE_WEB_APP_URL}/payment-success` +
         `?tourId=${tourId}` +
         `&reference=${booking.referenceId}` +
-        `&amount=${amount}` +
-        `&currency=${currency}`,
+        `&amount=${advanceAmount}` +
+        `&currency=LKR`,
 
       cancel_url:
-        `http://localhost:5173/payment-cancel` +
-        `?tourId=${tourId}` +
-        `&reference=${booking.referenceId}`,
+        `${import.meta.env.VITE_WEB_APP_URL}/payment-cancel` +
+        `?tourId=${tourId}`,
 
-      notify_url:
-        "http://localhost:8087/bookingservice/api/v1/payment-notify",
+      notify_url: `${import.meta.env.VITE_PAYMENTSERVICE_API_URL}/notify`,
 
       order_id: orderIdRef.current,
       items: "TripGenix Tour Package",
       currency,
-      amount,
+      amount: advanceAmount,
 
       first_name: booking.bookingDetails.nameOfBooker,
-      last_name: "",
+      last_name: booking.bookingDetails.nameOfBooker,
       email: booking.bookingDetails.bookerEmail,
       phone: booking.bookingDetails.bookerPhone,
       address: booking.tripDetails.startLocation,
@@ -126,37 +121,47 @@ export default function PaymentPage() {
   }
 
   /* =========================
-     LOADING
+     LOADING STATE
   ========================= */
   if (loading || !booking) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-600">
-        Preparing payment…
+        Preparing secure payment…
       </div>
     );
   }
+
+  /* =========================
+     CALCULATIONS
+  ========================= */
+  const totalAmount = Number(booking.routeDetails.bookingPrice);
+  const advanceAmount = (totalAmount * 0.25).toFixed(2);
+  const balanceAmount = (totalAmount * 0.75).toFixed(2);
 
   /* =========================
      UI
   ========================= */
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
-      
       {/* LEFT — TERMS */}
       <div className="lg:w-1/2 w-full bg-gray-200 p-8 lg:p-12">
-        <h1 className="text-3xl font-bold mb-6">
-          Terms & Conditions
-        </h1>
+        <h1 className="text-3xl font-bold mb-6">Terms & Conditions</h1>
 
         <ul className="list-disc list-inside space-y-4 text-gray-700">
-          <li>Payments are processed securely.</li>
-          <li>Amount shown is final and confirmed.</li>
-          <li>Refunds follow company policy.</li>
-          <li>By paying, you agree to our platform rules.</li>
+          <li>
+            You are required to pay <b>25% advance</b> to confirm the booking.
+          </li>
+          <li>
+            The advance payment is <b>non-refundable</b>.
+          </li>
+          <li>
+            The remaining balance can be paid later as per TripGenix policy.
+          </li>
+          <li>Payments are securely processed via PayHere.</li>
         </ul>
       </div>
 
-      {/* RIGHT — PAYMENT */}
+      {/* RIGHT — PAYMENT CARD */}
       <div className="lg:w-1/2 w-full flex items-center justify-center p-6">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="h-2 bg-blue-600"></div>
@@ -168,19 +173,31 @@ export default function PaymentPage() {
 
             <div className="space-y-4 text-sm text-gray-700">
               <div className="flex justify-between">
-                <span>Reference</span>
-                <span className="font-medium">
-                  {booking.referenceId}
-                </span>
+                <span>Booking Reference</span>
+                <span className="font-medium">{booking.referenceId}</span>
               </div>
 
               <div className="flex justify-between">
-                <span>Amount</span>
-                <span className="font-semibold text-blue-600">
-                  LKR {Number(
-                    booking.routeDetails.bookingPrice
-                  ).toFixed(2)}
+                <span>Total Tour Cost</span>
+                <span className="font-semibold">
+                  LKR {totalAmount.toFixed(2)}
                 </span>
+              </div>
+
+              <div className="border-t pt-4 space-y-2">
+                <div className="flex justify-between text-green-700 font-semibold">
+                  <span>Advance Payment (25%)</span>
+                  <span>LKR {advanceAmount}</span>
+                </div>
+
+                <div className="flex justify-between text-gray-500">
+                  <span>Remaining Balance</span>
+                  <span>LKR {balanceAmount}</span>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs rounded-lg p-3 mt-4">
+                ⚠️ Advance payment is <b>non-refundable</b> once confirmed.
               </div>
             </div>
 
@@ -190,7 +207,7 @@ export default function PaymentPage() {
               onClick={submitPayment}
               className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-4 rounded-xl text-lg font-semibold"
             >
-              💳 Pay Now
+              💳 Pay 25% Advance Now
             </button>
 
             <p className="text-xs text-gray-400 text-center mt-4">

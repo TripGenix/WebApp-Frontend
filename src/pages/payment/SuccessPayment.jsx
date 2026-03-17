@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { CheckCircle, Download, ArrowRight } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -6,25 +6,87 @@ function SuccessPayment() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
 
+  const hasProcessedRef = useRef(false);
+
   // values passed from payment redirect
   const tourId = params.get("tourId");
   const referenceId = params.get("reference");
-  const amount = params.get("amount");
+  const amount = Number(params.get("amount") || 0);
   const currency = params.get("currency") || "LKR";
 
+  /* =========================
+     AUTO CONFIRM + SAVE PAYMENT
+  ========================= */
+
+  useEffect(() => {
+    console.log("🚀 Processing payment confirmation flow...");
+    if (!tourId || hasProcessedRef.current) return;
+
+    hasProcessedRef.current = true;
+
+    async function processPayment() {
+      try {
+        /* 1️⃣ Save payment */
+        const paymentRes = await fetch(
+          `${import.meta.env.VITE_PAYMENTSERVICE_API_URL}/pay`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              bookingId: Number(tourId),
+              paymentType: "CARD",
+              paidAmount: amount,
+            }),
+          }
+        );
+
+        if (!paymentRes.ok) {
+          throw new Error("Payment saving failed");
+        }
+
+        console.log("💰 Payment recorded");
+
+        /* 2️⃣ Confirm tour */
+        const confirmRes = await fetch(
+          `${import.meta.env.VITE_BOOKING_SERVICE_API_URL}/confirmTourByTourist/${tourId}`,
+          {
+            method: "POST",
+          }
+        );
+
+        if (!confirmRes.ok) {
+          throw new Error("Tour confirmation failed");
+        }
+
+        // console.log("✅ Tour confirmed successfully");
+      } catch (err) {
+        console.error("❌ Payment confirmation flow failed", err);
+      }
+    }
+
+    processPayment();
+  }, [tourId, amount]);
+
+  /* =========================
+     INVOICE
+  ========================= */
   const handleDownloadInvoice = () => {
     if (!tourId) return;
 
     window.open(
-      `http://localhost:8087/paymentcontroller/invoice/${tourId}`,
+      `${import.meta.env.VITE_PAYMENTSERVICE_API_URL}/invoice/${tourId}`,
       "_blank"
     );
   };
 
+  /* =========================
+     UI
+  ========================= */
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white max-w-lg w-full rounded-2xl shadow-xl p-10 text-center">
-        
         {/* Success Icon */}
         <div className="flex justify-center mb-6">
           <CheckCircle size={88} className="text-green-500" />
@@ -37,8 +99,7 @@ function SuccessPayment() {
 
         {/* Subtitle */}
         <p className="text-gray-600 mb-8">
-          Thank you for your payment. Your tour booking has been successfully
-          confirmed.
+          Your payment has been received and your tour is now confirmed.
         </p>
 
         {/* Summary */}
@@ -51,9 +112,9 @@ function SuccessPayment() {
           </div>
 
           <div className="flex justify-between">
-            <span className="text-gray-500">Amount Paid</span>
+            <span className="text-gray-500">Advance Paid</span>
             <span className="font-semibold text-green-600">
-              {currency} {amount}
+              {currency} {amount.toFixed(2)}
             </span>
           </div>
         </div>
@@ -80,8 +141,7 @@ function SuccessPayment() {
 
         {/* Footer */}
         <p className="mt-8 text-sm text-gray-500">
-          A confirmation email with your invoice has been sent to your email
-          address.
+          A confirmation email and invoice have been sent to your email.
         </p>
       </div>
     </div>

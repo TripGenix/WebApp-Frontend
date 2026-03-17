@@ -36,8 +36,7 @@ export default function FooterNew() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <MapPin className="w-8 h-8 text-[#1da9cc]" />
-              <h3 className="text-2xl font-bold text-white">TripGenix</h3>
+              <img src="/logo2.png" alt="TripGenix Logo" className="h-15 object-contain" />
             </div>
 
             <p className="text-sm text-gray-400 leading-relaxed">
