@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:8085"; 
+const API_BASE = "http://13.218.211.254:8085"; 
 
 const VehicleApi = {
   getVehicles: () =>

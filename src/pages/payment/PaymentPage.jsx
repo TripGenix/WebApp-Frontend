@@ -20,7 +20,7 @@ export default function PaymentPage() {
   async function fetchBooking() {
     try {
       const res = await fetch(
-        `http://localhost:8087/bookingservice/api/v1/get_booking_by_id/${tourId}`,
+        `http://13.218.211.254:8087/bookingservice/api/v1/get_booking_by_id/${tourId}`,
       );
 
       if (!res.ok) throw new Error("Booking not found");
@@ -53,7 +53,7 @@ export default function PaymentPage() {
     }
 
     const response = await fetch(
-      `http://localhost:8087/paymentcontroller/getHash` +
+      `http://13.218.211.254:8087/paymentcontroller/getHash` +
         `?orderId=${orderIdRef.current}` +
         `&amount=${advanceAmount}` +
         `&currency=${currency}`,

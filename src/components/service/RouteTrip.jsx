@@ -54,7 +54,7 @@ export default function RouteTrip({
 
   useEffect(() => {
   axios
-    .get("http://localhost:8089/api/v1/getAll")
+    .get("http://13.218.211.254:8089/api/v1/getAll")
     .then((res) => {
       console.log("API Response:", res.data); // full data
 
