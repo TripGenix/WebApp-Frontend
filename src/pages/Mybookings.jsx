@@ -9,8 +9,8 @@ export default function Mybookings() {
 
   // 2. Fetch data from Spring Boot Backend
   useEffect(() => {
-    const touristId = 1; // Replace with actual logged-in user ID logic
-    axios.get(`http://localhost:8087/api/v1/booking/user-dashboard/${touristId}`)
+    const touristId =localStorage.getItem("userId"); // Replace with actual logged-in user ID logic
+    axios.get(`http://13.218.211.254:8087/api/v1/booking/user-dashboard/${touristId}`)
       .then((response) => {
         setBookings(response.data);
         setLoading(false);

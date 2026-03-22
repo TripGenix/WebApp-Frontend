@@ -13,8 +13,6 @@ const VEHICLE_API = import.meta.env.VITE_VEHICLE_SERVICE_API_URL;
 
 /* ---------------- TEMP GUIDES ---------------- */
 
-
-
 /* ---------------- DISTANCE HELPER ---------------- */
 
 function getDistanceKm(lat1, lon1, lat2, lon2) {
@@ -53,29 +51,32 @@ export default function RouteTrip({
   const [guides, setGuides] = useState([]);
 
   useEffect(() => {
-  axios
-    .get("http://localhost:8089/api/v1/getAll")
-    .then((res) => {
-      console.log("API Response:", res.data); // full data
+    axios
+      .get("http://13.218.211.254:8089/api/v1/getAll")
+      .then((res) => {
+        console.log("API Response:", res.data);
 
-      const formattedGuides = res.data.map((g) => ({
-        id: g.tourGuideId,
-        name: g.name,
-        experience: g.driver + " years",
-        languages: [g.language],
-        rating: 4.5,
-        phone: g.nic,
-        photo: g.image,
-      }));
+        const formattedGuides = res.data.map((g) => ({
+          id: g.tourGuideId,
+          name: g.name,
+          experience: `${g.experienceYears || 0} years`,
+          languages: g.languages
+            ? g.languages.split(", ").map((l) => l.trim())
+            : [],
+          phone: g.contactNumber,
+          photo: g.image,
+          price: g.pricePerDay,
+          nic: g.nic,
+        }));
 
-      console.log("Formatted Guides:", formattedGuides); // formatted data
+        console.log("Formatted Guides:", formattedGuides);
 
-      setGuides(formattedGuides);
-    })
-    .catch((err) => {
-      console.error("API Error:", err);
-    });
-}, []);
+        setGuides(formattedGuides);
+      })
+      .catch((err) => {
+        console.error("API Error:", err);
+      });
+  }, []);
   /* ---------------- HELPERS ---------------- */
 
   const updateTrip = (field, value) => {

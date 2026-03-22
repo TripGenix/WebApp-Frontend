@@ -4,7 +4,7 @@ import { useState } from "react";
 import FooterNew from "../components/FooterNew";
 
 
-const CONTACT_API_URL = "http://localhost:8088/email/api/v1/send";
+const CONTACT_API_URL = "http://13.218.211.254:8088/email/api/v1/send";
 const GOOGLE_MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.653457199121!2d80.5284093!3d6.0592815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae624e75d5b78a9%3A0xcb1b5e3a34a17966!2sMatara%2081000!5e0!3m2!1sen!2slk!4v1703058882042!5m2!1sen!2slk";
 
 function ContactUs(){

@@ -140,7 +140,7 @@ const EditProfile = ({ currentProfile, onSave }) => {
       const userId = localStorage.getItem("userId");
 
       await axios.put(
-        `http://localhost:8082/api/v1/tourists/${userId}`,
+        `http://13.218.211.254:8082/api/v1/tourists/${userId}`,
         {
           first_name: profile.firstName,
           last_name: profile.lastName,
@@ -160,7 +160,7 @@ const EditProfile = ({ currentProfile, onSave }) => {
 
       setDisplayInfo(profile);
       onSave(profile);
-
+      localStorage.setItem("profileImageUrl", profile.profileImage);
       alert("Profile Updated Successfully!");
 
     } catch (error) {
