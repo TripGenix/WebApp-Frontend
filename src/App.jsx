@@ -33,7 +33,8 @@ import Support from "./pages/Support";
 import Logout from "./pages/Logout";
 import VehicleView from "./pages/VehicleView"; 
 import Servicedetails from "./pages/servicedetails";
-
+import SingleTourGuide from "./components/tourguide/SingleTourGuide";
+import FinalPayment from "./pages/payment/FInalPayment";
 
 
 function App() {
@@ -71,7 +72,9 @@ function App() {
         <Route path="cancel-tour" element={<CanclePayment />} />
         <Route path="/payment-success" element={<SuccessPayment />} />
         <Route path="/service-details" element={<Servicedetails />} />
-
+        <Route path="/tourGuidsView" element={<TourGuidePage />} />
+        <Route path="/single-tourguid/:id" element={<SingleTourGuide />} />
+<Route path="/final-payment/:id" element={<FinalPayment />} />
 
         <Route
           path="/dashboard"

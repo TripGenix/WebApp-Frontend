@@ -12,7 +12,7 @@ export default function MyPayments() {
     const touristId = localStorage.getItem("userId");
 
     axios
-      .get(`http://localhost:8087/api/v1/booking/user-payments/${touristId}`)
+      .get(`http://13.218.211.254:8087/api/v1/booking/user-payments/${touristId}`)
       .then((response) => {
         setPayments(response.data);
         setLoading(false);

@@ -16,9 +16,10 @@ export default function TripSummary({
   const [summary, setSummary] = useState(null);
   const [openDetails, setOpenDetails] = useState(false);
 
-  const guideCost = resources.guide ? 4500 : 0;
-
-  /* =============================
+console.log(resources.guide);
+const guideCost =
+  (resources.guide?.price || 0) *
+  (routeDetails.suggestedDate || 1);  /* =============================
      CALCULATE TOTAL COST
   ============================= */
   async function fetchEstimatedCost() {
@@ -263,12 +264,12 @@ export default function TripSummary({
         </div>
       )}
 
-      <button
+      {/* <button
         className="bg-[#0F3B45] text-white w-full py-3 rounded-full mt-6"
         onClick={confirmBooking}
       >
         Confirm Booking
-      </button>
+      </button> */}
 
       {/* FULL ROUTE DETAILS MODAL */}
       {openDetails && (

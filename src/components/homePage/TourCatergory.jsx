@@ -8,6 +8,7 @@ function TourCatergory() {
 
       {/* 🔹 Heading Section */}
       <div className="text-center max-w-3xl">
+        {/* asj */}
 
         <p className="uppercase tracking-[0.3em] text-sm text-gray-500 mb-3">
           Discover Sri Lanka
