@@ -8,7 +8,7 @@ function TourGuidePage() {
 
   useEffect(() => {
     axios
-      .get("http://13.218.211.254:8089/api/v1/getAll")
+      .get("http://localhost:8089/api/v1/getAll")
       .then((res) => {
         const formatted = res.data.map((g) => ({
           id: g.tourGuideId,

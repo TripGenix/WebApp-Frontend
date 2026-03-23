@@ -6,11 +6,12 @@ function DriverModal({ drivers = [], onClose, onSelect }) {
   return (
     <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-xl w-full max-w-xl max-h-[80vh] overflow-y-auto shadow-lg">
-
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Select a Driver</h2>
-          <button className="text-lg font-bold" onClick={onClose}>✖</button>
+          <button className="text-lg font-bold" onClick={onClose}>
+            ✖
+          </button>
         </div>
 
         {/* Driver List / Empty State */}
@@ -22,22 +23,41 @@ function DriverModal({ drivers = [], onClose, onSelect }) {
                 className="border rounded-xl p-3 hover:bg-gray-100 flex gap-4 items-center"
               >
                 <img
-                  src={d.photo}
-                  alt={d.name}
+                  src={d.driverImage}
+                  alt={d.firstName + " " + d.lastName}
                   className="w-20 h-20 rounded-full object-cover"
                 />
 
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold">{d.name}</h3>
+                  <h3 className="text-xl font-semibold">
+                    {d.firstName} {d.lastName}
+                  </h3>
                   <p className="text-gray-600">
-                    Experience: {d.experience}
+                    Age:{" "}
+                    {(() => {
+                      const birthDate = new Date(d.dateOfBirth);
+                      const today = new Date();
+
+                      let age = today.getFullYear() - birthDate.getFullYear();
+                      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+                      if (
+                        monthDiff < 0 ||
+                        (monthDiff === 0 &&
+                          today.getDate() < birthDate.getDate())
+                      ) {
+                        age--;
+                      }
+
+                      return age;
+                    })()}
                   </p>
-                  <p className="text-gray-600">
+                  {/* <p className="text-gray-600">
                     Rating: ⭐ {d.rating}
-                  </p>
-                  <p className="text-gray-600">
+                  </p> */}
+                  {/* <p className="text-gray-600">
                     Phone: {d.phone}
-                  </p>
+                  </p> */}
 
                   <button
                     onClick={() => onSelect(d)}
@@ -61,7 +81,6 @@ function DriverModal({ drivers = [], onClose, onSelect }) {
             </p>
           </div>
         )}
-
       </div>
     </div>
   );

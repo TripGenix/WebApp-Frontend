@@ -8,7 +8,7 @@ function SingleTourGuide() {
 
   useEffect(() => {
     axios
-      .get(`http://13.218.211.254:8089/api/v1/search?tourId=${id}`)
+      .get(`http://localhost:8089/api/v1/search?tourId=${id}`)
       .then((res) => setGuide(res.data))
       .catch(console.error);
   }, [id]);

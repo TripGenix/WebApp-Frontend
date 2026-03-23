@@ -52,7 +52,7 @@ export default function RouteTrip({
 
   useEffect(() => {
     axios
-      .get("http://13.218.211.254:8089/api/v1/getAll")
+      .get("http://localhost:8089/api/v1/getAll")
       .then((res) => {
         console.log("API Response:", res.data);
 
@@ -96,6 +96,7 @@ export default function RouteTrip({
       .catch(console.error);
   }, []);
 
+  console.log("Available Drivers:", drivers);
   /* ---------------- LOAD VEHICLES ---------------- */
 
   const loadVehicles = async () => {

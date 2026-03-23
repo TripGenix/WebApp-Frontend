@@ -37,7 +37,7 @@ export default function UserLogin() {
 
     await toast
       .promise(
-        axios.post("http://13.218.211.254:8082/api/v1/tourists/login", {
+        axios.post("http://localhost:8082/api/v1/tourists/login", {
           email,
           password,
         }),

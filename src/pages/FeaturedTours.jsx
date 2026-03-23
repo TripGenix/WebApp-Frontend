@@ -42,7 +42,7 @@ export default function FeaturedTours() {
   // Fetch packages
   useEffect(() => {
     axios
-      .get("http://13.218.211.254:8084/api/packages")
+      .get("http://localhost:8084/api/packages")
       .then((res) => setPackages(res.data || []))
       .catch((err) => console.error("Failed to load packages", err))
       .finally(() => setLoading(false));

@@ -38,7 +38,7 @@ export default function TouristDashboard() {
       try {
 
         const response = await axios.get(
-          `http://13.218.211.254:8082/api/v1/tourists/${userId}`,
+          `http://localhost:8082/api/v1/tourists/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -92,7 +92,7 @@ export default function TouristDashboard() {
     try {
 
       await axios.delete(
-        `http://13.218.211.254:8082/api/v1/tourists/${userId}`,
+        `http://localhost:8082/api/v1/tourists/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`

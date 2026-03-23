@@ -2,7 +2,7 @@ export const registerTourist = async (touristData) => {
   console.log("Registering tourist with data:", touristData);
   try {
     const response = await fetch(
-      "http://13.218.211.254:8082/api/v1/tourists/register",
+      "http://localhost:8082/api/v1/tourists/register",
       {
         method: "POST",
         headers: {
