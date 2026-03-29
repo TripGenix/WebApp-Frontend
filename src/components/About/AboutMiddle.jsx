@@ -13,35 +13,27 @@ const AboutMiddle = () => {
   return (
     <div className="about-area" id="about-sec">
       <div className="about-container">
-
-        {/* LEFT IMAGE GROUP */}
-<div className="about-left">
-  <div className="about-images">
-
-    <div className="img-box img1-box">
-      <img src={img1} alt="About" className="about-img img1" />
-    </div>
-
-    <div className="img-box img2-box">
-      <img src={img2} alt="About" className="about-img img2" />
-    </div>
-
-    <div className="img-box img3-box movingX">
-      <img src={img3} alt="About" className="about-img img3" />
-    </div>
-
-  </div>
-</div>
-
+        {/* LEFT IMAGE GROUP - All 3 boxes now have floating-anim */}
+        <div className="about-left">
+          <div className="about-images-wrapper">
+            <div className="img-box box-1 floating-anim">
+              <img src={img1} alt="Wildlife" className="about-img" />
+            </div>
+            <div className="img-box box-2 floating-anim">
+              <img src={img2} alt="Sigiriya" className="about-img" />
+            </div>
+            <div className="img-box box-3 floating-anim">
+              <img src={img3} alt="Turtle" className="about-img" />
+            </div>
+          </div>
+        </div>
 
         {/* RIGHT TEXT GROUP */}
         <div className="about-right">
           <div className="title-area">
-            <span className="sub-title">Welcome To Trip Genix</span>
-
+            <span className="sub-title">Welcome To TripGenix</span>
             <h2 className="sec-title">
-             <br />
-            Sri Lanka's Most Trusted Travel Platform
+              Sri Lanka's Most Trusted <br /> Travel Platform
             </h2>
           </div>
 
@@ -50,12 +42,11 @@ const AboutMiddle = () => {
           </p>
 
           <p>
-            Our mission is to make your journey smoother, safer, and more meaningful. With personalised recommendations, verified guides, and seamless planning tools, we ensure every traveller enjoys Sri Lanka’s beauty without hassle. From adventure seekers to relaxed holidaymakers, we’re here to support every step of your journey.
+            Our mission is to make your journey smoother, safer, and more meaningful. With personalised recommendations, verified guides, and seamless planning tools, we ensure every traveller enjoys Sri Lanka’s beauty without hassle.
           </p>
 
           {/* ABOUT ITEMS */}
           <div className="about-item-wrap">
-
             <div className="about-item">
               <div className="about-item-img circle">
                 <div className="flip-icon">
@@ -91,13 +82,11 @@ const AboutMiddle = () => {
                 <p>Travel confidently with friendly, expert local guides.</p>
               </div>
             </div>
-
           </div>
 
           <div className="about-button">
             <a className="contact-btn" href="/contact">Contact With Us</a>
           </div>
-
         </div>
       </div>
     </div>

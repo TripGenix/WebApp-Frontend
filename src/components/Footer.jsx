@@ -7,7 +7,7 @@ function Footer(){
     return(
         
         <div className="w-full h-fit flex  flex-col justify-center items-center">
-            <div className=" max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  lg:[50vh] gap-4">
+            {/* <div className=" max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  lg:[50vh] gap-4">
                 <div className="m-5">
                     <div className="w-fit text-2xl text-accent">Logo Here</div>
                     <div className="w-[90%]  text-[16px] mt-5">Rapidiously myocardinate cross-platform intellectual capital model. Appropriately create interactive infrastructures</div>
@@ -44,7 +44,7 @@ function Footer(){
                         <div className="w-[75%] h-30 bg-green-200 lg:hidden rounded-xl bg-cover bg-center" style={{ backgroundImage: `url(${man4})` }}></div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="w-full h-14 bg-yellow-400 bg-cover bg-center text-primary text-[14px] flex justify-center items-center" style={{backgroundImage: `url(${foot})`}}>Copyright 2025 Tourm. All Rights Reserved.</div>
         </div>
