@@ -46,6 +46,7 @@ export default function UserLogin() {
           success: async (response) => {
             const token = response.data.token;
             localStorage.setItem("token", token);
+            localStorage.setItem("userId", response.data.id);
 
             const decoded = jwtDecode(token);
 

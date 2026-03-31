@@ -26,7 +26,7 @@ export default function RoutePlanner() {
       destinations: destinations.map((d) => d.value),
     };
 
-    console.log("Plan Trip Payload:", payload);
+    // console.log("Plan Trip Payload:", payload);
     // 👉 call backend / route API here
   };
 

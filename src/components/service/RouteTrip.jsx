@@ -7,29 +7,32 @@ import TourGuideModal from "./TourGuideModal";
 import GooglePlaceInput from "../service/GooglePlaceInput";
 import axios from "axios";
 
-const DRIVER_API = import.meta.env.VITE_DRIVER_SERVICE_API_URL+"/get-approved-drivers";
+const DRIVER_API =
+  import.meta.env.VITE_DRIVER_SERVICE_API_URL + "/get-approved-drivers";
 const VEHICLE_API = import.meta.env.VITE_VEHICLE_SERVICE_API_URL;
 
-const tempTourGuides = [
-  {
-    id: 1,
-    name: "Shenal Fernando",
-    experience: "6 years",
-    languages: ["English", "Sinhala"],
-    rating: 4.8,
-    phone: "0774567890",
-    photo: "https://randomuser.me/api/portraits/men/12.jpg",
-  },
-  {
-    id: 2,
-    name: "Nadeesha Madubhani",
-    experience: "4 years",
-    languages: ["Tamil", "Sinhala"],
-    rating: 4.6,
-    phone: "0712345678",
-    photo: "https://randomuser.me/api/portraits/women/44.jpg",
-  },
-];
+/* ---------------- TEMP GUIDES ---------------- */
+
+
+
+/* ---------------- DISTANCE HELPER ---------------- */
+
+function getDistanceKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) ** 2;
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+/* ===================== COMPONENT ===================== */
 
 export default function RouteTrip({
   tripDetails,
@@ -47,21 +50,40 @@ export default function RouteTrip({
 
   const [vehicles, setVehicles] = useState([]);
   const [drivers, setDrivers] = useState([]);
+  const [guides, setGuides] = useState([]);
 
+  useEffect(() => {
+  axios
+    .get("http://localhost:8089/api/v1/getAll")
+    .then((res) => {
+      console.log("API Response:", res.data); // full data
+
+      const formattedGuides = res.data.map((g) => ({
+        id: g.tourGuideId,
+        name: g.name,
+        experience: g.driver + " years",
+        languages: [g.language],
+        rating: 4.5,
+        phone: g.nic,
+        photo: g.image,
+      }));
+
+      console.log("Formatted Guides:", formattedGuides); // formatted data
+
+      setGuides(formattedGuides);
+    })
+    .catch((err) => {
+      console.error("API Error:", err);
+    });
+}, []);
   /* ---------------- HELPERS ---------------- */
 
   const updateTrip = (field, value) => {
-    setTripDetails((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setTripDetails((prev) => ({ ...prev, [field]: value }));
   };
 
   const updateResource = (type, value) => {
-    setResources((prev) => ({
-      ...prev,
-      [type]: value,
-    }));
+    setResources((prev) => ({ ...prev, [type]: value }));
   };
 
   /* ---------------- LOAD DRIVERS ---------------- */
@@ -78,7 +100,7 @@ export default function RouteTrip({
   const loadVehicles = async () => {
     try {
       const res = await axios.get(
-        `${VEHICLE_API}/webRequestController/api/v1/getvehicles`
+        `${VEHICLE_API}/webRequestController/api/v1/getvehicles`,
       );
       setVehicles(res.data);
       setShowVehicleModal(true);
@@ -86,6 +108,23 @@ export default function RouteTrip({
       console.error("Vehicle fetch failed", err);
     }
   };
+
+  /* ---------------- NEAREST VEHICLES ---------------- */
+
+  const nearestVehicles = tripDetails.startLocation?.lat
+    ? vehicles
+        .map((v) => ({
+          ...v,
+          distance: getDistanceKm(
+            tripDetails.startLocation.lat,
+            tripDetails.startLocation.lng,
+            v.latitude,
+            v.longitude,
+          ),
+        }))
+        .filter((v) => v.distance <= 50)
+        .sort((a, b) => a.distance - b.distance)
+    : vehicles;
 
   /* ---------------- SELECTION HANDLERS ---------------- */
 
@@ -111,14 +150,12 @@ export default function RouteTrip({
 
   const filteredDrivers = resources.vehicle
     ? drivers.filter((d) => {
-        const categoryMatch =
-          d.selectedVehicleCategories?.includes(
-            Number(resources.vehicle.type)
-          );
-        const numberMatch =
-          d.selectedVehicleByNumber?.includes(
-            resources.vehicle.vehicleId
-          );
+        const categoryMatch = d.selectedVehicleCategories?.includes(
+          Number(resources.vehicle.type),
+        );
+        const numberMatch = d.selectedVehicleByNumber?.includes(
+          resources.vehicle.vehicleId,
+        );
         return categoryMatch || numberMatch;
       })
     : [];
@@ -146,9 +183,7 @@ export default function RouteTrip({
           <DynamicList
             title="Add Destination"
             destinations={tripDetails.destinations}
-            setDestinations={(list) =>
-              updateTrip("destinations", list)
-            }
+            setDestinations={(list) => updateTrip("destinations", list)}
           />
         </div>
 
@@ -156,18 +191,14 @@ export default function RouteTrip({
           label="Start Date"
           type="date"
           value={tripDetails.startDate}
-          onChange={(e) =>
-            updateTrip("startDate", e.target.value)
-          }
+          onChange={(e) => updateTrip("startDate", e.target.value)}
         />
 
         <InputField
           label="End Date"
           type="date"
           value={tripDetails.endDate}
-          onChange={(e) =>
-            updateTrip("endDate", e.target.value)
-          }
+          onChange={(e) => updateTrip("endDate", e.target.value)}
         />
 
         {/* VEHICLE */}
@@ -184,9 +215,7 @@ export default function RouteTrip({
         <div>
           <button
             disabled={!resources.vehicle}
-            className={`glass-btn w-full ${
-              !resources.vehicle && "opacity-50"
-            }`}
+            className={`glass-btn w-full ${!resources.vehicle && "opacity-50"}`}
             onClick={() => setShowDriverModal(true)}
           >
             Select Driver
@@ -204,9 +233,7 @@ export default function RouteTrip({
           >
             Select Tour Guide
           </button>
-          {resources.guide && (
-            <GlassCard item={resources.guide} type="guide" />
-          )}
+          {resources.guide && <GlassCard item={resources.guide} type="guide" />}
         </div>
       </div>
 
@@ -220,10 +247,11 @@ export default function RouteTrip({
 
       {showVehicleModal && (
         <VehicleModal
-          vehicles={vehicles}
+          vehicles={nearestVehicles}
           passengerCount={passengerCount}
           onClose={() => setShowVehicleModal(false)}
           onSelect={handleVehicleSelect}
+          startLocation={tripDetails.startLocation}
         />
       )}
 
@@ -237,7 +265,7 @@ export default function RouteTrip({
 
       {showGuideModal && (
         <TourGuideModal
-          guides={tempTourGuides}
+          guides={guides}
           onClose={() => setShowGuideModal(false)}
           onSelect={(g) => {
             updateResource("guide", g);
@@ -258,22 +286,29 @@ function GlassCard({ item, type }) {
         src={item.driverImage || item.vehicleImages?.[0] || item.photo}
         className="w-24 h-24 object-cover rounded-lg"
       />
-      <div>
-        <p className="font-semibold">
-          {item.vehicleName || item.name}
-        </p>
+
+      <div className="space-y-1">
+        <p className="font-semibold">{item.vehicleName || item.name}</p>
 
         {type === "vehicle" && (
           <>
             <p>Booking: {item.bookingPrice}</p>
             <p>Per Km: {item.costPerKm}</p>
             <p>Seats: {item.passengerCount}</p>
+
+            {item.distance !== undefined && (
+              <p className="text-sm text-gray-600">
+                Distance for starting Location: {item.distance.toFixed(1)} km
+              </p>
+            )}
           </>
         )}
 
         {type === "driver" && (
           <>
-            <p>{item.firstName} {item.lastName}</p>
+            <p>
+              {item.firstName} {item.lastName}
+            </p>
             <p>{item.phone}</p>
           </>
         )}

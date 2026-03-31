@@ -3,3 +3,14 @@
   margin: 0;
   padding: 0;
 }
+.dashboard-layout {
+  display: flex;
+}
+
+.dashboard-content {
+  margin-left: 240px; /* sidebar width */
+  padding: 20px;
+  width: calc(100% - 240px);
+  min-height: 100vh;
+  background: #f6fbff;
+}

@@ -4,14 +4,15 @@ import "./AboutHero.css";
 export default function AboutHero() {
   return (
     <div className="about-hero">
-      <img src={oceanimg} alt="ocean" />
+      <div className="parallax-wrapper">
+        <img src={oceanimg} alt="ocean background" className="parallax-img" />
+      </div>
     
       <div className="hero-content">
-        <h1>About TRIPGENIX</h1>
-        <p>Home → About TRIPGENIX</p>
+       
+        <h1 className="main-title">About TRIPGENIX</h1>
+        <div className="title-underline"></div>
       </div>
     </div>
-
   );
 }
-
